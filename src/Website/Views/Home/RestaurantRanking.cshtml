@@ -1,0 +1,60 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Restaurant Ranking";
+}
+
+<div style="width:98%; margin:1%;">
+    
+    <!--
+
+    <asp:DataList ID="dlsRestaurants" runat="server" CssClass="list" Width="50%">
+        <ItemTemplate>
+            <p>
+                <div class="listing">
+                    <span class="rating"><%# Eval("Rating")%></span> 
+                    <span class="restaurant"><a href="Restaurant.aspx?id=<%# Eval("RestaurantId")%>"><%# Eval("Name")%></a></span>
+                </div>
+            </p>
+        </ItemTemplate>
+    </asp:DataList>
+    
+    -->
+</div>
+
+@section Head
+{
+    <style type="text/css">
+        .list
+        {
+        	text-align:center; margin-left:auto; margin-right:auto; width:100px;
+        }
+        .list tr,td 
+        {
+        	text-align:left;
+        }
+        .listing 
+        {
+        	height:30px;
+        	border-bottom: solid 1px #666666;
+        	width:100%;
+        	vertical-align:middle;
+        }
+        .rating 
+        {
+        	border:solid 2px #5EB2D4;
+        	padding:5px;
+        	font-weight:bold;
+        	color: #293955;
+        	width:10px;
+        }
+        .restaurant,
+        .restaurant a
+        {
+        	text-decoration:none;
+        	font-weight:bold;
+        	color: #293955;
+        }
+        
+    </style>
+}

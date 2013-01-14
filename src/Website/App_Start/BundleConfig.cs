@@ -9,8 +9,8 @@ namespace LunchPicker.Web.App_Start
             bundles.Add(new ScriptBundle("~/Scripts/jquery").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery.*"));
-            
-            bundles.Add(new ScriptBundle("~/Scripts/jquery-rumble").Include(
+
+            bundles.Add(new ScriptBundle("~/Scripts/jrumble").Include(
                 "~/Scripts/jrumble.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

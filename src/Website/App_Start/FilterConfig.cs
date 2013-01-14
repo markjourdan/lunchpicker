@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace LunchPicker
+namespace LunchPicker.Web.App_Start
 {
     public class FilterConfig
     {

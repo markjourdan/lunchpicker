@@ -14,7 +14,7 @@
 
 @section documentReady {
 
-    AddButtonPick($('#btnPick'), $('txtPlace'), $('.ResturantLink'));
+    AddButtonPick($('#btnPick'), $('#place'), $('.ResturantLink'));
 }
 @section scripts
 {
@@ -45,11 +45,13 @@
                             textbox.val(data.Name).trigger('mouseup');
                             textbox.unbind('mousedown');
 
-                            link.append("<a href='Restaurant.aspx?id=" + data.RestaurantId + "'>view more information on " + data.Name + "</a>");
+                            link.append("<a href='@Url.Action("Restaurant", "Home")?id=" + data.RestaurantId + "'>view more information on " + data.Name + "</a>");
                         }, 1000);                                                
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
                         alert(textStatus);
+                        console.log(errorThrown);
+                        console.log(xmlHttpRequest);
                     }
                 });
             });

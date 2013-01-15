@@ -1,5 +1,4 @@
 ﻿@using LunchPicker.Domain.DataTransferObject
-@using LunchPicker.Domain.Entities
 @model dynamic
 
 @{
@@ -16,30 +15,17 @@
             </div>
         </p>    
     </script>
-
-    @(Html.Kendo()
-        .ListView<RestaurantListingDto>()
-        .Name("Restaurants")
-        .TagName("div")
-        .ClientTemplateId("RestaurantItem")
-        .DataSource(data => data.Read(read => read.Action("GetResturantRanking", "Home")))
-          )
-
-
-    <!--
-
-    <asp:DataList ID="dlsRestaurants" runat="server" CssClass="list" Width="50%">
-        <ItemTemplate>
-            <p>
-                <div class="listing">
-                    <span class="rating"><%# Eval("Rating")%></span> 
-                    <span class="restaurant"><a href="Restaurant.aspx?id=<%# Eval("RestaurantId")%>"><%# Eval("Name")%></a></span>
-                </div>
-            </p>
-        </ItemTemplate>
-    </asp:DataList>
     
-    -->
+    <div style="width:98%; margin:1%;">
+        @(Html.Kendo()
+            .ListView<RestaurantListingDto>()
+            .Name("Restaurants")
+            .TagName("div")
+            .HtmlAttributes(new {@class = "list"})
+            .ClientTemplateId("RestaurantItem")
+            .DataSource(data => data.Read(read => read.Action("GetResturantRanking", "Home")))
+              )
+    </div>
 </div>
 
 @section Head
@@ -50,19 +36,16 @@
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-            width: 100px;
+            width: 50%;
+            border: none;
         }
-
-            .list tr, td
-            {
-                text-align: left;
-            }
 
         .listing
         {
             height: 30px;
             border-bottom: solid 1px #666666;
             width: 100%;
+            text-align: left;
             vertical-align: middle;
         }
 

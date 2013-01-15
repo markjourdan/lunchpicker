@@ -1,11 +1,31 @@
-﻿@model dynamic
+﻿@using LunchPicker.Domain.DataTransferObject
+@using LunchPicker.Domain.Entities
+@model dynamic
 
 @{
     ViewBag.Title = "Restaurant Ranking";
 }
 
-<div style="width:98%; margin:1%;">
-    
+<div style="width: 98%; margin: 1%;">
+
+    <script type="text/x-kendo-tmpl" id="RestaurantItem">
+        <p>
+            <div class="listing">
+                <span class="rating">${Rating}</span> 
+                <span class="restaurant"><a href='@Url.Action("Restaurant", "Home") + ?id=${RestaurantId}'>${Name}</a></span>
+            </div>
+        </p>    
+    </script>
+
+    @(Html.Kendo()
+        .ListView<RestaurantListingDto>()
+        .Name("Restaurants")
+        .TagName("div")
+        .ClientTemplateId("RestaurantItem")
+        .DataSource(data => data.Read(read => read.Action("GetResturantRanking", "Home")))
+          )
+
+
     <!--
 
     <asp:DataList ID="dlsRestaurants" runat="server" CssClass="list" Width="50%">
@@ -27,34 +47,40 @@
     <style type="text/css">
         .list
         {
-        	text-align:center; margin-left:auto; margin-right:auto; width:100px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100px;
         }
-        .list tr,td 
+
+            .list tr, td
+            {
+                text-align: left;
+            }
+
+        .listing
         {
-        	text-align:left;
+            height: 30px;
+            border-bottom: solid 1px #666666;
+            width: 100%;
+            vertical-align: middle;
         }
-        .listing 
+
+        .rating
         {
-        	height:30px;
-        	border-bottom: solid 1px #666666;
-        	width:100%;
-        	vertical-align:middle;
+            border: solid 2px #5EB2D4;
+            padding: 5px;
+            font-weight: bold;
+            color: #293955;
+            width: 10px;
         }
-        .rating 
-        {
-        	border:solid 2px #5EB2D4;
-        	padding:5px;
-        	font-weight:bold;
-        	color: #293955;
-        	width:10px;
-        }
+
         .restaurant,
         .restaurant a
         {
-        	text-decoration:none;
-        	font-weight:bold;
-        	color: #293955;
+            text-decoration: none;
+            font-weight: bold;
+            color: #293955;
         }
-        
     </style>
 }

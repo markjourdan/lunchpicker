@@ -18,7 +18,7 @@ namespace LunchPicker.Infrastructure
                 .As<IObjectContext>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => UnitOfWork.Configure(config => config.WithContext<LunchContext>(c.Resolve<IObjectContext>())))
+            builder.Register(c => UnitOfWork.Configure(config => config.WithContext<LunchContext>(c.Resolve<IObjectContext>())).Initialize())
                 .As<ISession>().As<IObjectContextProvider>()
                 .InstancePerLifetimeScope();
 

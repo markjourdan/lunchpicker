@@ -1,0 +1,54 @@
+﻿@using LunchPicker.Domain.Entities
+@{
+    ViewBag.Title = "manage restaurants";
+}
+
+@(Html.Kendo()
+    .Grid<Restaurant>()
+    .Name("Restaurants")
+    .Columns(columns =>
+            {
+                columns.Bound(p => p.Name);
+                columns.Bound(p => p.Address1).Width(140);
+                columns.Bound(p => p.City).Width(140);
+                columns.Bound(p => p.State).Width(100);
+                columns.Bound(p => p.Zip).Width(100);
+                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+            })
+    .DataSource(data => data.Ajax()
+        .Model(model =>
+            {
+                model.Id(p => p.RestaurantId);
+                model.Field(column => column.RestaurantId).Editable(false);
+            })
+        .Events(events => events.Error("error_handler"))
+        .Create(create => create.Action("AddRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Put))
+        .Read(read => read.Action("GetRestaurants", "Restaurant", new { Area ="Clique"}).Type(HttpVerbs.Get))
+        .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
+        .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
+        )
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.PopUp))
+    .Sortable()
+    .Scrollable()
+    )
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

@@ -15,9 +15,19 @@ namespace LunchPicker.Infrastructure.Repositories
             return ContextProvider.GetContext<LunchContext>().Query<Restaurant>();
         }
 
-        public Restaurant GetResturant(int restaurantId)
+        public Restaurant GetResturant(long restaurantId)
         {
             return FindSingleOrDefault<Restaurant>(r => r.RestaurantId == restaurantId);
+        }
+
+        public void DeleteRestaurant(Restaurant restaurant)
+        {
+            ContextProvider.GetContext<LunchContext>().Delete(restaurant);
+        }
+
+        public void Add(Restaurant restaurant)
+        {
+            ContextProvider.GetContext<LunchContext>().Add(restaurant);
         }
     }
 }

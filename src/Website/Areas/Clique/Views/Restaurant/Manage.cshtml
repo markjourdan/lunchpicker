@@ -9,13 +9,15 @@
     .Columns(columns =>
             {
                 columns.Bound(p => p.Name);
-                columns.Bound(p => p.Address1).Width(140);
+                columns.Bound(p => p.Address1).Width(100);
+                columns.Bound(p => p.Address2).Width(100).Hidden(true);
                 columns.Bound(p => p.City).Width(140);
                 columns.Bound(p => p.State).Width(100);
                 columns.Bound(p => p.Zip).Width(100);
                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
             })
     .DataSource(data => data.Ajax()
+        .PageSize(20)
         .Model(model =>
             {
                 model.Id(p => p.RestaurantId);
@@ -27,7 +29,7 @@
         .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
         .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
         )
-    .ToolBar(toolbar => toolbar.Create())
+    .ToolBar(toolbar => toolbar.Create().Text("new restaurant"))
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Sortable()
     .Scrollable()

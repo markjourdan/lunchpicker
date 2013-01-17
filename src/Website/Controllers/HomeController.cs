@@ -26,7 +26,7 @@ namespace LunchPicker.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetRestaurantPick()
+        public ActionResult GetRestaurantPick()
         {
             var resturants = LunchRepository.GetResturants();
 
@@ -39,7 +39,7 @@ namespace LunchPicker.Web.Controllers
         }
         
         [HttpGet]
-        public JsonResult GetResturantRanking(DataSourceRequest request)
+        public ActionResult GetResturantRanking(DataSourceRequest request)
         {
             var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(LunchRepository.GetResturants()).OrderByDescending(r => r.Rating);
 

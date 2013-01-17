@@ -61,8 +61,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Dino.2.0.0.0\lib\net40\Dino.dll</HintPath>
     </Reference>
-    <Reference Include="Kendo.Mvc">
-      <HintPath>..\..\..\..\..\AppData\Roaming\Telerik\Updates\kendoui.aspnetmvc.hotfix.2012.3.1114.commercial\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll</HintPath>
+    <Reference Include="Kendo.Mvc, Version=2012.3.1315.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\AppData\Roaming\Telerik\Updates\kendoui.aspnetmvc.hotfix.2012.3.1315.commercial\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -158,11 +159,17 @@
     <Content Include="Areas\Clique\Views\Web.config" />
     <Content Include="Areas\Clique\Views\Restaurant\Manage.cshtml" />
     <Content Include="Areas\Clique\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\Restaurant.cshtml" />
     <None Include="Scripts\jquery-1.8.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery.bgpos.js" />
     <Content Include="Scripts\jquery.corner.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jrumble.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

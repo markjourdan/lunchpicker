@@ -18,6 +18,7 @@
             })
     .DataSource(data => data.Ajax()
         .PageSize(20)
+        .ServerOperation(false)
         .Model(model =>
             {
                 model.Id(p => p.RestaurantId);
@@ -29,6 +30,7 @@
         .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
         .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
         )
+    .Events(events => events.Save("SaveRestaurant"))
     .ToolBar(toolbar => toolbar.Create().Text("new restaurant"))
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Sortable()
@@ -51,6 +53,11 @@
                 });
                 alert(message);
             }
+        }
+        
+        function SaveRestaurant(e) {
+            e.model.CreatedDateUtc = e.model.CreatedDateUtc.toDateString();
+            e.model.LastUpdatedDateUtc = e.model.LastUpdatedDateUtc.toDateString();
         }
     </script>
 }

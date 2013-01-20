@@ -18,7 +18,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             return View();
         }
 
-        public JsonResult GetRestaurants(DataSourceRequest request)
+        public ActionResult GetRestaurants(DataSourceRequest request)
         {
             return Json(LunchRepository.GetResturants().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
@@ -53,7 +53,10 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (restaurant != null)
             {
-                LunchRepository.DeleteRestaurant(restaurant);
+                var restaurantToDelete = LunchRepository.GetResturant(restaurant.RestaurantId);
+                LunchRepository.DeleteRestaurant(restaurantToDelete);
+
+                _Session.Commit();
             }
 
             return Json(ModelState.ToDataSourceResult());
@@ -62,11 +65,13 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         [HttpPut]
         public ActionResult AddRestaurant(DataSourceRequest request, Restaurant restaurant)
         {
+            restaurant.LastUpdatedDateUtc = restaurant.CreatedDateUtc = DateTime.UtcNow;
+            restaurant.CreatedBy = User.Identity.Name;
+
             if (ModelState.IsValid)
             {
-                restaurant.LastUpdatedDateUtc = restaurant.CreatedDateUtc = DateTime.UtcNow;
-                restaurant.CreatedBy = User.Identity.Name;
                 LunchRepository.Add(restaurant);
+                _Session.Commit();
             }
 
             return Json(new[] { restaurant }.ToDataSourceResult(request, ModelState));

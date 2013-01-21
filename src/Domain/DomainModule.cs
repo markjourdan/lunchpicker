@@ -6,6 +6,7 @@ namespace LunchPicker.Domain
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => new Clock()).As<IClock>();
         }
     }
 }

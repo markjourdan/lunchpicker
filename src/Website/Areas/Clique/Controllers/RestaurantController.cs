@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using LunchPicker.Domain;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
 
@@ -11,6 +12,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
     public class RestaurantController : Controller
     {
         public ILunchRepository LunchRepository { get; set; }
+        public IClock Clock { get; set; }
         public ISession _Session { get; set; }
 
         public ActionResult Manage()
@@ -65,7 +67,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         [HttpPut]
         public ActionResult AddRestaurant(DataSourceRequest request, Restaurant restaurant)
         {
-            restaurant.LastUpdatedDateUtc = restaurant.CreatedDateUtc = DateTime.UtcNow;
+            restaurant.LastUpdatedDateUtc = restaurant.CreatedDateUtc = Clock.UtcNow;
             restaurant.CreatedBy = User.Identity.Name;
 
             if (ModelState.IsValid)

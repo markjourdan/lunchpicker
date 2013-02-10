@@ -1,4 +1,7 @@
-﻿@using LunchPicker.Domain.Entities
+﻿@using System.Collections
+@using LunchPicker.Domain.Entities
+
+@model LunchPicker.Web.Areas.Clique.Models.ManageRestaurant
 @{
     ViewBag.Title = "manage restaurants";
 }
@@ -12,7 +15,7 @@
                 columns.Bound(p => p.Address1).Width(100);
                 columns.Bound(p => p.Address2).Width(100).Hidden(true);
                 columns.Bound(p => p.City).Width(140);
-                columns.Bound(p => p.State).Width(100);
+                columns.ForeignKey(p => p.StateId, Model.States, "StateId", "FullName").Title("State").Width(100);
                 columns.Bound(p => p.Zip).Width(100);
                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
             })

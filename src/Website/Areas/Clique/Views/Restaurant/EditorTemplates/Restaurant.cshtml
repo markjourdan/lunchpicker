@@ -1,1 +1,43 @@
-﻿
+﻿@*@model LunchPicker.Domain.Entities.Restaurant
+
+<div id="restaurant-edit">
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.EditorFor(m => m.Name, new { @class="k-input"})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Address1)
+        @Html.EditorFor(m => m.Address1, new { @class="k-input"})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Address2)
+        @Html.EditorFor(m => m.Address2, new { @class="k-input"})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.City)
+        @Html.EditorFor(m => m.City, new { @class="k-input"})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.State)
+        @Html.EditorFor(m => m.State)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Zip)
+        @Html.EditorFor(m => m.Zip, new { @class="k-input"})
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Phone)
+        @Html.EditorFor(m => m.Phone, new { @class="k-input"})
+    </div>
+</div>
+<style type="text/css">
+    #restaurant-edit label
+    {
+        display: block;
+        float: left;
+        width: 125px;
+    }
+    #restaurant-edit .text-box {
+        width: 165px;
+    }
+</style>*@

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using LunchPicker.Domain;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
+using LunchPicker.Web.Areas.Clique.Models;
 
 namespace LunchPicker.Web.Areas.Clique.Controllers
 {
@@ -17,7 +17,8 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult Manage()
         {
-            return View();
+            var model = new ManageRestaurant {States = LunchRepository.GetStates()};
+            return View(model);
         }
 
         public ActionResult GetRestaurants(DataSourceRequest request)
@@ -77,6 +78,14 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             }
 
             return Json(new[] { restaurant }.ToDataSourceResult(request, ModelState));
+        }
+
+        [HttpGet]
+        public ActionResult GetStates()
+        {
+            var states = LunchRepository.GetStates();
+
+            return new JsonResult {Data = states, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
     }
 }

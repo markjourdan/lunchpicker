@@ -21,6 +21,12 @@ namespace LunchPicker.Infrastructure.Repositories
             return ContextProvider.GetContext<LunchContext>().Query<T>().Where(predicate);
         }
 
+
+        protected IQueryable<T> FindAll<T>() where T : class
+        {
+            return ContextProvider.GetContext<LunchContext>().Query<T>();
+        }
+
         protected T FindSingleOrDefault<T>(Expression<Func<T, bool>> predicate) where T : class
         {
             return ContextProvider.GetContext<LunchContext>().Query<T>().Where(predicate).SingleOrDefault();

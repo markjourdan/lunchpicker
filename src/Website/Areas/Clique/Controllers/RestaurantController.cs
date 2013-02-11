@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -18,6 +19,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         public ActionResult Manage()
         {
             var model = new ManageRestaurant {States = LunchRepository.GetStates()};
+
             return View(model);
         }
 

@@ -1,5 +1,4 @@
-﻿@using System.Collections
-@using LunchPicker.Domain.Entities
+﻿@using LunchPicker.Domain.Entities
 
 @model LunchPicker.Web.Areas.Clique.Models.ManageRestaurant
 @{
@@ -15,7 +14,7 @@
                 columns.Bound(p => p.Address1).Width(100);
                 columns.Bound(p => p.Address2).Width(100).Hidden(true);
                 columns.Bound(p => p.City).Width(140);
-                columns.ForeignKey(p => p.StateId, Model.States, "StateId", "FullName").Title("State").Width(100);
+                columns.ForeignKey(p => p.StateId, Model.States, "StateId", "FullName").EditorTemplateName("State").Width(100);
                 columns.Bound(p => p.Zip).Width(100);
                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
             })
@@ -59,6 +58,8 @@
         }
         
         function SaveRestaurant(e) {
+            console.log(e.model);
+            
             e.model.CreatedDateUtc = e.model.CreatedDateUtc.toDateString();
             e.model.LastUpdatedDateUtc = e.model.LastUpdatedDateUtc.toDateString();
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Principal;
 using System.Text;
 
@@ -23,6 +24,7 @@ namespace LunchPicker.Domain.Entities
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
+        [Display(Name = "State")]
         public int? StateId { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }

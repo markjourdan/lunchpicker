@@ -1,10 +1,5 @@
-﻿@model LunchPicker.Domain.Entities.State
-   
-
-@(
-    Html.Kendo().DropDownListFor(m => m)
-    .Name("State")
-    .DataTextField("FullName")
-    .DataValueField("StateId")
-    .DataSource(data => data.Read("GetStates", "Restaurant", new {Area = "Clique"})).ToClientTemplate()
-    )
+﻿@(
+ Html.Kendo().DropDownListFor(m => m)        
+        .BindTo((SelectList)ViewData[ViewData.TemplateInfo.GetFullHtmlFieldName("") + "_Data"])
+        .OptionLabel("select").ToClientTemplate()
+)

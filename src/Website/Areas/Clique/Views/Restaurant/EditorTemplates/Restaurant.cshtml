@@ -1,33 +1,33 @@
-﻿@*@model LunchPicker.Domain.Entities.Restaurant
+﻿@model LunchPicker.Domain.Entities.Restaurant
 
 <div id="restaurant-edit">
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.Name)
-        @Html.EditorFor(m => m.Name, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.Name,  new { @class="k-input k-textbox"})
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.Address1)
-        @Html.EditorFor(m => m.Address1, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.Address1,  new { @class="k-input k-textbox"})
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.Address2)
-        @Html.EditorFor(m => m.Address2, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.Address2,  new { @class="k-input k-textbox"})
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.City)
-        @Html.EditorFor(m => m.City, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.City, new { @class="k-input k-textbox"})
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.State)
         @Html.EditorFor(m => m.State)
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.Zip)
-        @Html.EditorFor(m => m.Zip, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.Zip, new { @class="k-input k-textbox"})
     </div>
-    <div>
+    <div class="edit-line">
         @Html.LabelFor(m => m.Phone)
-        @Html.EditorFor(m => m.Phone, new { @class="k-input"})
+        @Html.TextBoxFor(m => m.Phone, new { @class="k-input k-textbox"})
     </div>
 </div>
 <style type="text/css">
@@ -37,7 +37,10 @@
         float: left;
         width: 125px;
     }
+    #restaurant-edit .edit-line {
+        padding: 5px 0;
+    }
     #restaurant-edit .text-box {
         width: 165px;
     }
-</style>*@
+</style>

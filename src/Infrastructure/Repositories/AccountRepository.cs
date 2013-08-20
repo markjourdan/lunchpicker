@@ -50,7 +50,7 @@ namespace LunchPicker.Infrastructure.Repositories
             ContextProvider.GetContext<LunchContext>().Add(clique);
         }
 
-        public Clique GetClique(int cliqueId)
+        public Clique GetClique(long cliqueId)
         {
             return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId);
         }

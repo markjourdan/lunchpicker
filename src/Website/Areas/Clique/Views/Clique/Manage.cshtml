@@ -1,0 +1,50 @@
+﻿@model LunchPicker.Domain.Entities.Clique
+
+@{
+    ViewBag.Title = "Manage My Clique";
+}
+
+<h1>Manage My Clique</h1>
+
+@{ Ajax.BeginForm("Save", "Clique", new AjaxOptions{ HttpMethod = "Post"}); }
+
+<div id="clique-edit">
+    <div>
+        @Html.LabelFor(c => c.Name)
+        @Html.EditorFor(c => c.Name, new { @class = "k-input k-textbox" })
+    </div>
+    <div class="submit">
+        <input type="submit" value="save" class="k-button" />
+    </div>
+</div>
+@{ Html.EndForm(); }
+
+<style type="text/css">
+    #clique-edit
+    {
+        padding: 20px;
+        width: 300px;
+    }
+
+    #clique-edit label
+    {
+        display: block;
+        float: left;
+        width: 125px;
+    }
+
+    #clique-edit .edit-line
+    {
+        padding: 5px 0;
+    }
+
+    #clique-edit .text-box
+    {
+        width: 165px;
+    }
+
+    #clique-edit .submit {
+        text-align: right;
+        padding-top: 5px;
+    }
+</style>

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Common.Logging;
 using Dino;
 using LunchPicker.Domain.Repositories;
 using LunchPicker.Domain.Utilities;
@@ -12,6 +13,8 @@ namespace LunchPicker.Infrastructure
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.Register(c => LogManager.GetCurrentClassLogger()).As<ILog>();
+
             builder.Register(c => new EncryptionUtility()).As<IEncryptionUtility>().InstancePerLifetimeScope();
 
             builder.Register(c => new LunchContext())

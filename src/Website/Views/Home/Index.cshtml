@@ -1,0 +1,93 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Lunch Picker";
+}
+
+<div style="text-align: center; width: 100%; margin-top: 100px;">
+    <label for="place" class="lblPick">today's spot</label>
+    <input name="place" type="text" readonly="readonly" id="place">
+    <div class="ResturantLink"></div>
+    <div><input type="submit" name="btnPick" value="crunch!" id="btnPick" class="k-button" role="button"></div>
+</div>
+
+
+@section documentReady {
+
+    AddButtonPick($('#btnPick'), $('#place'), $('.ResturantLink'));
+}
+@section scripts
+{
+    <script src="../../Scripts/jrumble.min.js"></script>    
+    <script type="text/javascript">
+
+        function AddButtonPick(control, textbox, link) {
+            control.click(function (e) {
+                e.preventDefault();
+                /* Disable the button */
+                $('#btnPick').attr('disabled', 'disabled');
+                control.val('No Second Chance!');
+
+                /* Begin shaking the textbox */
+                textbox.jrumble({
+                            rumbleEvent: 'mousedown',
+                        });
+                textbox.trigger('mousedown');
+
+                /* call service to get a restaurant pick and return it to stop shaking the textbox */
+                $.ajax({
+                    url: '@Url.Action("GetRestaurantPick")',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    cache: false,
+                    success: function (data) {                        
+                        window.setTimeout(function () {
+                            textbox.val(data.Name).trigger('mouseup');
+                            textbox.unbind('mousedown');
+
+                            link.append("<a href='@Url.Action("Restaurant", "Home")/" + data.RestaurantId + "'>view more information on " + data.Name + "</a>");
+                        }, 1000);                                                
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert(textStatus);
+                        console.log(errorThrown);
+                        console.log(xmlHttpRequest);
+                    }
+                });
+            });
+        }
+        
+    </script>
+}
+
+@section Head
+{
+    <style type="text/css">
+        .lblPick
+        {
+        	font-size:1em;
+        	font-weight:bold;
+        	color:#999999;
+        }
+        
+        #place
+        {
+        	font-size:2.5em;
+        	border:solid 3px #999999;
+        	color: #5EB2D4;
+        	padding:2px;
+        }
+         .ResturantLink a 
+        {
+        	color: #999999;
+        	font-weight:bold;
+        	text-decoration:none;
+        	border-bottom:solid 1px #5EB2D4;
+        }
+        .ResturantLink a:hover 
+        {
+        	color:#5EB2D4;
+        	border-bottom:solid 1px #999999;
+        }
+    </style>
+}

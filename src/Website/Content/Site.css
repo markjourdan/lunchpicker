@@ -1,0 +1,134 @@
+﻿body 
+{
+	font-size: .85em;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+.outer-wrapper,
+.outer-navigation
+{	
+	width:900px;
+	margin:auto;
+	position:relative;
+}
+
+.inner-wrapper
+{
+	margin-top:50px;
+	border:solid 10px #5EB2D4;
+	min-height:500px;	
+	padding:10px;
+}
+
+.inner-navigation
+{
+    width:200px;
+    margin-left:auto;
+    height:40px;
+}
+
+#title h1
+{
+	font-weight:bold;
+	color:#666666;
+	padding:0;
+	padding-right:5px;
+	margin:0;
+	bottom:-50px;
+	text-align:right;
+	position:relative;
+}
+
+h1 
+{
+    font-weight: bold;
+    font-size:2em;
+    color:#5EB2D4;
+}
+
+.required
+{
+	color:Red;
+	font-weight:bold;
+}
+
+/* Navigation */
+.navigation { margin-top:10px; width:auto; margin-left:auto; margin-right:auto; }
+.navigation ul {list-style:none;margin:0;padding:0;}
+.navigation li {float:left;width:100px;margin:0;padding:0;text-align:center;}
+.navigation li a {display:block;padding:5px 10px; margin-left:5px; height:100%;color:#FFF;text-decoration:none;border-right:1px solid #FFF;}
+.navigation li a {background:url(bg2.jpg) repeat 0 0;}
+.navigation li a:hover, li a:focus, li a:active {background-position:-150px 0;}
+.navigation #a a {background:url(bg.jpg) repeat -20px 35px;}
+
+
+
+header,
+footer,
+nav,
+section {
+    display: block;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
+}
+
+legend 
+{
+    font-size:1.2em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+}
+
+.editor-label 
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field 
+{
+    margin:0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}

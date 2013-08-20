@@ -1,13 +1,12 @@
-﻿@using System.Collections
-@using LunchPicker.Domain.Entities
+﻿@using LunchPicker.Web.Areas.Clique.Models
 
-@model LunchPicker.Web.Areas.Clique.Models.ManageRestaurant
+@model ManageRestaurant
 @{
     ViewBag.Title = "manage restaurants";
 }
 
 @(Html.Kendo()
-    .Grid<Restaurant>()
+    .Grid<RestaurantModel>()
     .Name("Restaurants")
     .Columns(columns =>
             {
@@ -33,10 +32,11 @@
         .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
         .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
         )
-    .Events(events => events.Save("SaveRestaurant"))
     .ToolBar(toolbar => toolbar.Create().Text("new restaurant"))
+    .Events(e => e.Save("SaveRestaurant"))
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Sortable()
+    .Selectable()
     .Scrollable()
     )
 
@@ -47,9 +47,9 @@
         function error_handler(e) {
             if (e.errors) {
                 var message = "Errors:\n";
-                $.each(e.errors, function (key, value) {
+                $.each(e.errors, function(key, value) {
                     if ('errors' in value) {
-                        $.each(value.errors, function () {
+                        $.each(value.errors, function() {
                             message += this + "\n";
                         });
                     }
@@ -57,10 +57,34 @@
                 alert(message);
             }
         }
-        
+
         function SaveRestaurant(e) {
-            e.model.CreatedDateUtc = e.model.CreatedDateUtc.toDateString();
-            e.model.LastUpdatedDateUtc = e.model.LastUpdatedDateUtc.toDateString();
+            if (typeof e.model.State !== "undefined") {
+                e.model.StateId = e.model.State.StateId;
+            }
         }
+
+        function serialize(prefix, data) {
+            var result = {},
+                dateRegex = /^\/Date\((.*?)\)\/$/;
+            for (var i = 0; i < data.length; i++) {
+                for (var field in data[i]) {
+                    var value = data[i][field];
+                    if (typeof value === "string") {
+                        var date = dateRegex.exec(value);
+                        if (date) {
+                            value = kendo.toString(new Date(parseInt(date[1])), "d");
+                        }
+                    }
+                    if (typeof value === "object") {
+                        value = serialize(field, $.makeArray(value));
+                    }
+                    result[prefix + "[" + i + "]." + field] = value;
+                }
+            }
+
+            return result;
+        }
+
     </script>
 }

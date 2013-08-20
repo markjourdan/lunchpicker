@@ -35,5 +35,10 @@ namespace LunchPicker.Infrastructure.Repositories
         {
             return FindAll<State>();
         }
+
+        public State GetState(int stateId)
+        {
+            return FindSingleOrDefault<State>(c => c.StateId == stateId);
+        }
     }
 }

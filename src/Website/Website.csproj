@@ -152,6 +152,8 @@
     <Compile Include="Areas\Clique\CliqueAreaRegistration.cs" />
     <Compile Include="Areas\Clique\Controllers\RestaurantController.cs" />
     <Compile Include="Areas\Clique\Models\ManageRestaurant.cs" />
+    <Compile Include="Areas\Clique\Models\RestaurantModel.cs" />
+    <Compile Include="Areas\Clique\Models\StateModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -169,8 +171,8 @@
     <Content Include="Areas\Clique\Views\Web.config" />
     <Content Include="Areas\Clique\Views\Restaurant\Manage.cshtml" />
     <Content Include="Areas\Clique\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\Restaurant.cshtml" />
-    <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\State.cshtml" />
+    <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\RestaurantModel.cshtml" />
+    <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\StateModel.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

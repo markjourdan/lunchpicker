@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -23,11 +24,23 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult GetRestaurants(DataSourceRequest request)
         {
-            return Json(LunchRepository.GetResturants().ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(LunchRepository.GetResturants().Cast<Restaurant>()
+                .Select(r => new RestaurantModel
+                             {
+                                 RestaurantId = r.RestaurantId,
+                                 Address1 = r.Address1,
+                                 Address2 = r.Address2,
+                                 City = r.City,
+                                 Name = r.Name,
+                                 Phone = r.Phone,
+                                 State = r.State,
+                                 StateId = r.StateId,
+                                 Zip = r.Zip
+                             }).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult UpdateRestaurant(DataSourceRequest request, Restaurant restaurant)
+        public JsonResult UpdateRestaurant(DataSourceRequest request, RestaurantModel restaurant)
         {
             if (restaurant != null && ModelState.IsValid)
             {
@@ -52,7 +65,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         }
 
         [HttpDelete]
-        public ActionResult DeleteRestaurant(DataSourceRequest request, Restaurant restaurant)
+        public ActionResult DeleteRestaurant(DataSourceRequest request, RestaurantModel restaurant)
         {
             if (restaurant != null)
             {
@@ -73,6 +86,9 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
             if (ModelState.IsValid)
             {
+                if (restaurant.StateId.HasValue)
+                    restaurant.State = LunchRepository.GetState(restaurant.StateId.GetValueOrDefault());
+
                 LunchRepository.Add(restaurant);
                 _Session.Commit();
             }

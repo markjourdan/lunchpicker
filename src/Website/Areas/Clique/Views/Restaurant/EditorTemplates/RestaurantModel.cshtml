@@ -1,4 +1,4 @@
-﻿@model LunchPicker.Domain.Entities.Restaurant
+﻿@model LunchPicker.Web.Areas.Clique.Models.RestaurantModel
 
 <div id="restaurant-edit">
     <div class="edit-line">
@@ -18,8 +18,8 @@
         @Html.TextBoxFor(m => m.City, new { @class="k-input k-textbox"})
     </div>
     <div class="edit-line">
-        @Html.LabelFor(m => m.State)
-        @Html.EditorFor(m => m.State)
+        @Html.LabelFor(m => m.StateId)
+        @Html.EditorFor(m => m.StateId, "StateModel")
     </div>
     <div class="edit-line">
         @Html.LabelFor(m => m.Zip)
@@ -31,12 +31,15 @@
     </div>
 </div>
 <style type="text/css">
-    #restaurant-edit label
-    {
-        display: block;
-        float: left;
-        width: 125px;
+    #restaurant-edit {
+        padding: 20px;
     }
+     #restaurant-edit label
+     {
+         display: block;
+         float: left;
+         width: 125px;
+     }
     #restaurant-edit .edit-line {
         padding: 5px 0;
     }

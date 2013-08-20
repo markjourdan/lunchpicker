@@ -10,5 +10,6 @@ namespace LunchPicker.Domain.Repositories
         void DeleteRestaurant(Restaurant restaurant);
         void Add(Restaurant restaurant);
         IQueryable<State> GetStates();
+        State GetState(int stateId);
     }
 }

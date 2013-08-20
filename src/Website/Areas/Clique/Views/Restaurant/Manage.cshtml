@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "manage restaurants";
 }
+<h1>Manage Your Restaurants</h1>
 
 @(Html.Kendo()
     .Grid<RestaurantModel>()
@@ -37,7 +38,8 @@
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Sortable()
     .Selectable()
-    .Scrollable()
+    .Pageable(p => p.PageSizes(true).Refresh(true))
+    .Scrollable(s => s.Height(500))
     )
 
 

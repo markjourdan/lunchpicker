@@ -17,7 +17,7 @@ namespace LunchPicker.Web.Areas.Clique
             context.MapRoute(
                 "Clique_default",
                 "Clique/{cliqueId}/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Clique", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

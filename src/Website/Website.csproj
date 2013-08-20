@@ -150,6 +150,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AutoMapperMapping.cs" />
     <Compile Include="Areas\Clique\CliqueAreaRegistration.cs" />
+    <Compile Include="Areas\Clique\Controllers\CliqueController.cs" />
     <Compile Include="Areas\Clique\Controllers\RestaurantController.cs" />
     <Compile Include="Areas\Clique\Models\ManageRestaurant.cs" />
     <Compile Include="Areas\Clique\Models\RestaurantModel.cs" />
@@ -173,6 +174,7 @@
     <Content Include="Areas\Clique\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\RestaurantModel.cshtml" />
     <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\StateModel.cshtml" />
+    <Content Include="Areas\Clique\Views\Clique\Index.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

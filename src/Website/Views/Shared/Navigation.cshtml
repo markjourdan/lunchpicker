@@ -1,14 +1,14 @@
 ﻿<div class="outer-navigation">
     <div class="inner-navigation">
         <div class="navigation">
-            <ul id="a"> 
+            <ul id="a">
                 <li>
-                    <a id="hypHome" href="@Url.Action("Index", "Home")">home</a>
-                </li> 
+                    <a id="hypHome" href="@Url.Action("Index", "Home", new {Area = ""})">home</a>
+                </li>
                 <li>
-                    <a id="hypRestaurantList" href="@Url.Action("RestaurantRanking", "Home")">ranking</a>
-                </li> 
-            </ul> 
+                    <a id="hypRestaurantList" href="@Url.Action("RestaurantRanking", "Home", new {Area = ""} )">ranking</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

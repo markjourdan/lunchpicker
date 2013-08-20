@@ -36,9 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Dino.2.0.0.0\lib\net40\Dino.dll</HintPath>
     </Reference>
-    <Reference Include="Kendo.Mvc, Version=2012.3.1315.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+    <Reference Include="Kendo.Mvc, Version=2013.2.716.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Website\bin\Kendo.Mvc.dll</HintPath>
+      <HintPath>..\lib\KENDOUIMVC\2013.2.716.340\Kendo.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

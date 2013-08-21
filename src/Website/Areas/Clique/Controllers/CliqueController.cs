@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Security.Principal;
+using System.Data;
 using System.Web.Mvc;
 using Common.Logging;
 using Dino;
@@ -31,6 +31,9 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             {
                 var cliqueS = AccountRepository.GetClique(clique.CliqueId);
 
+                if(cliqueS == null) 
+                    throw new DataException(string.Format("Unable to find a clique with the following id '{0}'", clique.CliqueId));
+
                 cliqueS.Name = clique.Name;
                 cliqueS.Update(User);
                 _Session.Commit();
@@ -40,7 +43,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex.Message, ex);
-                return new JsonResult { Data = ex.Message };
+                throw new Exception(string.Format("Unable to save the Clique. <i>{0}</i>", ex.Message));
             }
         }
     }

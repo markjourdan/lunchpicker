@@ -5,6 +5,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/jquery")
+    <script src="~/Scripts/lunchpicker.js"></script>
 
 	<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
 	<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
@@ -19,6 +20,7 @@
                 <h1>lunch hour crunch</h1>
             </div>
             <div class="inner-wrapper">
+                <div class="error-message"></div>
                 @RenderBody()
             </div>
         </div>

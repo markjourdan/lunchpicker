@@ -166,6 +166,7 @@
     <Compile Include="Areas\Clique\Models\RestaurantModel.cs" />
     <Compile Include="Areas\Clique\Models\StateModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Framework\JsonExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +201,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jrumble.min.js" />
+    <Content Include="Scripts\lunchpicker.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

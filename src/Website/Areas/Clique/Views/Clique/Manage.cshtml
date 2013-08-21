@@ -48,3 +48,12 @@
         padding-top: 5px;
     }
 </style>
+
+<script type="text/javascript">
+    function onSaveCliqueFailure(xhr, errorType, exception) {
+        alert(xhr.responseText.errorMessage);
+        console.log(xhr);
+        console.log(errorType);
+        console.log(exception);
+    }
+</script>

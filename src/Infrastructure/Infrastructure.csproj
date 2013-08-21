@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Data\Configurations\CliqueConfiguration.cs" />
     <Compile Include="Data\Configurations\LanguageConfiguration.cs" />
+    <Compile Include="Data\Configurations\RestaurantConfiguration.cs" />
     <Compile Include="Data\LunchContext.cs" />
     <Compile Include="Data\LunchInitializer.cs" />
     <Compile Include="InfrastructureModule.cs" />

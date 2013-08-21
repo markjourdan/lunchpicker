@@ -16,6 +16,7 @@ namespace LunchPicker.Infrastructure.Data
         {
             modelBuilder.Configurations.Add(new CliqueConfiguration());
             modelBuilder.Configurations.Add(new LanguageConfiguration());
+            modelBuilder.Configurations.Add(new RestaurantConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

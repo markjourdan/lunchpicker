@@ -5,6 +5,7 @@ using Common.Logging;
 using Dino;
 using LunchPicker.Domain;
 using LunchPicker.Domain.Repositories;
+using LunchPicker.Web.Framework;
 
 namespace LunchPicker.Web.Areas.Clique.Controllers
 {
@@ -20,11 +21,13 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             return View();
         }
 
-        public ActionResult Manage()
+        public ActionResult Manage(long cliqueId)
         {
-            return View();
+            var clique = AccountRepository.GetClique(cliqueId);
+            return View(clique);
         }
 
+        [JsonExceptionFilter]
         public ActionResult Save(Domain.Entities.Clique clique)
         {
             try

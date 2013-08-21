@@ -16,6 +16,12 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         public IClock Clock { get; set; }
         public ISession _Session { get; set; }
 
+        public ActionResult About(long id)
+        {
+            var model = LunchRepository.GetResturant(id);
+            return View(model);
+        }
+
         public ActionResult Manage()
         {
             var model = new ManageRestaurant {States = LunchRepository.GetStates()};
@@ -82,7 +88,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         public ActionResult AddRestaurant(DataSourceRequest request, Restaurant restaurant)
         {
             restaurant.LastUpdatedDateUtc = restaurant.CreatedDateUtc = Clock.UtcNow;
-            restaurant.CreatedBy = User.Identity.Name;
+            restaurant.CreatedBy = restaurant.LastUpdatedBy = User.Identity.Name;
 
             if (ModelState.IsValid)
             {

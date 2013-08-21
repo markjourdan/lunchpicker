@@ -26,6 +26,7 @@ namespace LunchPicker.Domain.Entities
         public int? StateId { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }
+        public long CliqueId { get; set; }
 
         public string LastUpdatedBy { get; set; }
         public string CreatedBy { get; set; }
@@ -33,6 +34,7 @@ namespace LunchPicker.Domain.Entities
         public DateTime CreatedDateUtc { get; set; }
 
         public virtual State State { get; set; }
+        public virtual Clique Clique { get; set; }
 
         public virtual ICollection<RestaurantRating> RestaurantRatings { get; set; }
 

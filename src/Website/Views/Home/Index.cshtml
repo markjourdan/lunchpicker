@@ -45,7 +45,7 @@
                             textbox.val(data.Name).trigger('mouseup');
                             textbox.unbind('mousedown');
 
-                            link.append("<a href='@Url.Action("Restaurant", "Home")/" + data.RestaurantId + "'>view more information on " + data.Name + "</a>");
+                            link.append("<a href='Clique/" + data.CliqueId + "/Restaurant/About/" + data.RestaurantId + "'>view more information on " + data.Name + "</a>");
                         }, 1000);                                                
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {

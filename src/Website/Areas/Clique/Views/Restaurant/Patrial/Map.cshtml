@@ -1,0 +1,69 @@
+﻿
+
+<div id="mapDiv"></div>       
+
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        GetMap();
+    });
+
+    var map = null;
+    
+    function GetMap() {
+        map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),
+            {
+                credentials: "AsozlpyP3eLV4xcdg-kSLlojRZB9h4ZXQG32XhppsNZu8NTNzw7ePOlNC-IVkKBr",
+                mapTypeId: Microsoft.Maps.MapTypeId.road,
+                zoom: 5
+            });
+        
+        map.getCredentials(MakeGeocodeRequest);
+    }
+    
+    function MakeGeocodeRequest(credentials) {
+        console.log($('#restaurant-address').text());
+        var geocodeRequest = "http://dev.virtualearth.net/REST/v1/Locations?query=" + encodeURI($('#restaurant-address').text()) + "&output=json&jsonp=GeocodeCallback&key=" + credentials;
+
+        CallRestService(geocodeRequest);
+    }
+    
+    function GeocodeCallback(result) {
+        console.log(result);
+        if (result &&
+               result.resourceSets &&
+               result.resourceSets.length > 0 &&
+               result.resourceSets[0].resources &&
+               result.resourceSets[0].resources.length > 0) {
+            // Set the map view using the returned bounding box
+            var bbox = result.resourceSets[0].resources[0].bbox;
+            var viewBoundaries = Microsoft.Maps.LocationRect.fromLocations(new Microsoft.Maps.Location(bbox[0], bbox[1]), new Microsoft.Maps.Location(bbox[2], bbox[3]));
+            map.setView({ bounds: viewBoundaries });
+
+            // Add a pushpin at the found location
+            var location = new Microsoft.Maps.Location(result.resourceSets[0].resources[0].point.coordinates[0], result.resourceSets[0].resources[0].point.coordinates[1]);
+            var pushpin = new Microsoft.Maps.Pushpin(location);
+            map.entities.push(pushpin);
+        }
+    }
+
+    function CallRestService(request) {
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        script.setAttribute("src", request);
+        document.body.appendChild(script);
+    }
+</script>
+
+<style type="text/css">
+    #mapDiv {
+       position: relative;
+       top: 20px;
+       left: 10px;
+       width: 300px;
+       height: 300px;
+       border:#5EB2D4 2px solid;
+    }
+</style>

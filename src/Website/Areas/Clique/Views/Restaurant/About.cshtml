@@ -5,3 +5,9 @@
 }
 
 <h2>@Model.Name</h2>
+
+<div id="restaurant-address">
+    @Html.Raw(@Model.GetHtmlFormattedAddress())
+</div>
+
+@Html.Partial("Patrial/Map")

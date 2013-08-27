@@ -188,6 +188,7 @@
     <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\StateModel.cshtml" />
     <Content Include="Areas\Clique\Views\Clique\Index.cshtml" />
     <Content Include="Areas\Clique\Views\Clique\Manage.cshtml" />
+    <Content Include="Areas\Clique\Views\Restaurant\Patrial\Map.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

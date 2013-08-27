@@ -2,8 +2,9 @@
 {
     public class RestaurantListingDto
     {
-        public string RestaurantId { get; set; }
+        public int RestaurantId { get; set; }
         public string Name { get; set; }
+        public int CliqueId { get; set; }
         public int Rating { get; set; }
     }
 }

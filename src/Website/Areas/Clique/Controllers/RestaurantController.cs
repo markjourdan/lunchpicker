@@ -7,6 +7,8 @@ using LunchPicker.Domain;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
 using LunchPicker.Web.Areas.Clique.Models;
+using LunchPicker.Web.Areas.Clique.Models.Clique;
+using LunchPicker.Web.Areas.Clique.Models.Restaurant;
 
 namespace LunchPicker.Web.Areas.Clique.Controllers
 {
@@ -18,7 +20,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult About(long id)
         {
-            var model = LunchRepository.GetResturant(id);
+            var model = LunchRepository.GetRestaurant(id);
             return View(model);
         }
 
@@ -30,7 +32,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult GetRestaurants(DataSourceRequest request)
         {
-            return Json(LunchRepository.GetResturants().Cast<Restaurant>()
+            return Json(LunchRepository.GetRestaurants().Cast<Restaurant>()
                 .Select(r => new RestaurantModel
                              {
                                  RestaurantId = r.RestaurantId,
@@ -50,7 +52,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (restaurant != null && ModelState.IsValid)
             {
-                var target = LunchRepository.GetResturant(restaurant.RestaurantId);
+                var target = LunchRepository.GetRestaurant(restaurant.RestaurantId);
 
                 if (target != null)
                 {
@@ -75,7 +77,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (restaurant != null)
             {
-                var restaurantToDelete = LunchRepository.GetResturant(restaurant.RestaurantId);
+                var restaurantToDelete = LunchRepository.GetRestaurant(restaurant.RestaurantId);
                 LunchRepository.DeleteRestaurant(restaurantToDelete);
 
                 _Session.Commit();

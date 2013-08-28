@@ -32,6 +32,11 @@ namespace LunchPicker.Infrastructure.Repositories
             return ContextProvider.GetContext<LunchContext>().Query<T>().Where(predicate).SingleOrDefault();
         }
 
+        protected void Delete<T>(T item) where T : class
+        {
+            ContextProvider.GetContext<LunchContext>().Delete(item);
+        }
+
         protected void DeleteMultiFromContext<T>(IEnumerable<T> collection) where T : class
         {
             foreach (var item in collection.ToList())

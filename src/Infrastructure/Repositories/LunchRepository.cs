@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Dino;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
@@ -11,12 +10,12 @@ namespace LunchPicker.Infrastructure.Repositories
     {
         public LunchRepository(IObjectContextProvider contextProvider) : base(contextProvider) { }
 
-        public IQueryable<Restaurant> GetResturants()
+        public IQueryable<Restaurant> GetRestaurants()
         {
             return ContextProvider.GetContext<LunchContext>().Query<Restaurant>();
         }
 
-        public Restaurant GetResturant(long restaurantId)
+        public Restaurant GetRestaurant(long restaurantId)
         {
             return FindSingleOrDefault<Restaurant>(r => r.RestaurantId == restaurantId);
         }

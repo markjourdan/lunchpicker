@@ -1,6 +1,6 @@
 ﻿using LunchPicker.Domain.Entities;
 
-namespace LunchPicker.Web.Areas.Clique.Models
+namespace LunchPicker.Web.Areas.Clique.Models.Restaurant
 {
     public class RestaurantModel
     {
@@ -12,7 +12,6 @@ namespace LunchPicker.Web.Areas.Clique.Models
         public int? StateId { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }
-        public long CliqueId { get; set; }
 
         public State State { get; set; }
     }

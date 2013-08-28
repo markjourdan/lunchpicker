@@ -162,9 +162,11 @@
     <Compile Include="Areas\Clique\CliqueAreaRegistration.cs" />
     <Compile Include="Areas\Clique\Controllers\CliqueController.cs" />
     <Compile Include="Areas\Clique\Controllers\RestaurantController.cs" />
-    <Compile Include="Areas\Clique\Models\ManageRestaurant.cs" />
-    <Compile Include="Areas\Clique\Models\RestaurantModel.cs" />
-    <Compile Include="Areas\Clique\Models\StateModel.cs" />
+    <Compile Include="Areas\Clique\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Clique\Models\Clique\ManageRestaurant.cs" />
+    <Compile Include="Areas\Clique\Models\Restaurant\RestaurantModel.cs" />
+    <Compile Include="Areas\Clique\Models\Clique\StateModel.cs" />
+    <Compile Include="Areas\Clique\Models\Users\UserModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Framework\JsonExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -189,6 +191,7 @@
     <Content Include="Areas\Clique\Views\Clique\Index.cshtml" />
     <Content Include="Areas\Clique\Views\Clique\Manage.cshtml" />
     <Content Include="Areas\Clique\Views\Restaurant\Patrial\Map.cshtml" />
+    <Content Include="Areas\Clique\Views\Users\Manage.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

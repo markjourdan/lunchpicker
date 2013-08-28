@@ -13,6 +13,9 @@ namespace LunchPicker.Domain.Repositories
         IEnumerable<User> GetUsersByEmail(string email);
         IEnumerable<Clique> GetCliques();
         void AddClique(Clique clique);
+        void AddUser(User user, Clique clique);
         Clique GetClique(long cliqueId);
+        User GetUser(long userId);
+        void DeleteUser(User userToDelete);
     }
 }

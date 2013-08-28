@@ -9,6 +9,7 @@ using LunchPicker.Domain.DataTransferObject;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
 using LunchPicker.Web.Areas.Clique.Models;
+using LunchPicker.Web.Areas.Clique.Models.Restaurant;
 
 namespace LunchPicker.Web.Controllers
 {
@@ -29,7 +30,7 @@ namespace LunchPicker.Web.Controllers
         [HttpGet]
         public ActionResult GetRestaurantPick()
         {
-            var resturants = LunchRepository.GetResturants();
+            var resturants = LunchRepository.GetRestaurants();
 
             var rand = new Random();
 
@@ -39,7 +40,6 @@ namespace LunchPicker.Web.Controllers
             return Json(restaurants.Skip(randomNumber).Select(a => new RestaurantModel
                                                                    {
                                                                        RestaurantId = a.RestaurantId,
-                                                                       CliqueId = a.CliqueId,
                                                                        StateId = a.StateId,
                                                                        Name = a.Name,
                                                                        Address2 = a.Address2,
@@ -54,7 +54,7 @@ namespace LunchPicker.Web.Controllers
         [HttpGet]
         public ActionResult GetResturantRanking(DataSourceRequest request)
         {
-            var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(LunchRepository.GetResturants()).OrderByDescending(r => r.Rating);
+            var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(LunchRepository.GetRestaurants()).OrderByDescending(r => r.Rating);
 
             return Json(restaurants.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }

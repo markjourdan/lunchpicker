@@ -2,6 +2,7 @@
 using AutoMapper;
 using LunchPicker.Domain.DataTransferObject;
 using LunchPicker.Domain.Entities;
+using LunchPicker.Web.Areas.Clique.Models.Users;
 
 namespace LunchPicker.Web.App_Start
 {
@@ -10,8 +11,9 @@ namespace LunchPicker.Web.App_Start
         public static void Map()
         {
             Mapper.CreateMap<Restaurant, RestaurantListingDto>()
-               .ForMember(dest => dest.Rating, opt => opt.MapFrom(origin => origin.RestaurantRatings.Any() ? origin.RestaurantRatings.Sum(r => r.Rating.Description) : 0));
+               .ForMember(dest => dest.Rating, opt => opt.MapFrom(origin => origin.Ratings.Any() ? origin.Ratings.Sum(r => r.Rating.Description) : 0));
 
+            Mapper.CreateMap<User, UserModel>();
         }
     }
 }

@@ -5,6 +5,8 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/Scripts/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/lunchpicker.js"></script>
 
 	<link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
@@ -25,6 +27,7 @@
             </div>
         </div>
         @Html.Partial("Navigation")
+        @Html.Partial("Footer")
         <script type="text/javascript">
             $(document).ready(function () {
                 $('.inner-wrapper').corner("round 14px");

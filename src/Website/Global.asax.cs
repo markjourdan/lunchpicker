@@ -20,6 +20,8 @@ namespace LunchPicker.Web
             var builder = new ContainerBuilder();
             builder.RegisterControllers(Assembly.GetExecutingAssembly()).PropertiesAutowired();
             builder.RegisterModule(new WebsiteModule());
+            builder.RegisterFilterProvider();
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
@@ -29,6 +31,7 @@ namespace LunchPicker.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AuthConfig.RegisterAuth();
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

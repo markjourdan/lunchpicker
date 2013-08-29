@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Dino;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
@@ -18,6 +20,15 @@ namespace LunchPicker.Infrastructure.Repositories
         public IEnumerable<Restaurant> GetCliquesRestaurants(int cliqueId)
         {
             return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId).Restaurants;
+        }
+
+        public IEnumerable<User> GetUsers(long cliqueId)
+        {
+            var clique = GetClique(cliqueId);
+            if (clique != null)
+                return clique.Users;
+
+            throw new ObjectNotFoundException(string.Format("Unable to locate a Clique with Id: {0}", cliqueId));
         }
 
         public IEnumerable<User> GetUsers()

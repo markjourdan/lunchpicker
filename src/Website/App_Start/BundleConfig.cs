@@ -10,11 +10,15 @@ namespace LunchPicker.Web.App_Start
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/jquery.*"));
 
-            bundles.Add(new ScriptBundle("~/Scripts/jrumble").Include(
-                "~/Scripts/jrumble.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/Site.css"));
+            bundles.Add(new ScriptBundle("~/Scripts/jrumble").Include("~/Scripts/jrumble.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/Site.css"));
         }
     }
 }

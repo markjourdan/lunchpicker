@@ -21,9 +21,9 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             return View();
         }
 
-        public ActionResult GetUsers(DataSourceRequest request)
+        public ActionResult GetUsers(DataSourceRequest request, long cliqueId)
         {
-            return Json(AccountRepository.GetUsers()
+            return Json(AccountRepository.GetUsers(cliqueId)
                 .Select(u => new UserModel
                              {
                                  EmailAddress = u.EmailAddress,

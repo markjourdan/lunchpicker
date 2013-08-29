@@ -1,0 +1,26 @@
+﻿<div class="outer-footer">
+    <div class="inner-footer">
+        <div class="footer">
+            @if (Request.IsAuthenticated) {
+                <text>
+                    <ul id="a">
+                        <li>
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                }
+                        </li>
+                        <li>
+                            @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+                        </li>
+                    </ul>
+                </text>
+            } else {
+                <ul id="a">
+                    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@ namespace LunchPicker.Domain.Repositories
     {
         IEnumerable<User> GetCliquesUsers(int cliqueId);
         IEnumerable<Restaurant> GetCliquesRestaurants(int cliqueId);
-        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetUsers(long cliqueId);
         void AddUser(User user);
         User GetUserByUserName(string username);
         IEnumerable<User> GetUsersByEmail(string email);

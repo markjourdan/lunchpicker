@@ -13,18 +13,19 @@
     .Name("States")
     .Columns(columns =>
             {
-                columns.Bound(p => p.FullName);
+                columns.Bound(p => p.FullName).Width(200);
                 columns.Bound(p => p.Abreviation).Width(100);
                 columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
             })
     .DataSource(data => data.Ajax()
-        .PageSize(20)
+        .PageSize(50)
         .ServerOperation(false)
         .Model(model =>
             {
                 model.Id(p => p.StateId);
                 model.Field(column => column.StateId).Editable(false);
             })
+        .Sort(a => a.Add(o => o.Abreviation))            
         .Events(events => events.Error("error_handler"))
         .Create(create => create.Action("AddState", "State", new {Area = "CrunchAdmin"}).Type(HttpVerbs.Put))
         .Read(read => read.Action("GetStates", "State", new { Area ="CrunchAdmin"}).Type(HttpVerbs.Get))

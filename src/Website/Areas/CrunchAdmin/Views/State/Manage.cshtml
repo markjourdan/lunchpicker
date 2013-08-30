@@ -1,0 +1,65 @@
+﻿@using Kendo.Mvc.UI
+@using LunchPicker.Web.Areas.CrunchAdmin.Models.State
+@model dynamic
+
+@{
+    ViewBag.Title = "Manage States";
+}
+
+<h1>@ViewBag.Title</h1>
+
+@(Html.Kendo()
+    .Grid<StateModel>()
+    .Name("States")
+    .Columns(columns =>
+            {
+                columns.Bound(p => p.FullName);
+                columns.Bound(p => p.Abreviation).Width(100);
+                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+            })
+    .DataSource(data => data.Ajax()
+        .PageSize(20)
+        .ServerOperation(false)
+        .Model(model =>
+            {
+                model.Id(p => p.StateId);
+                model.Field(column => column.StateId).Editable(false);
+            })
+        .Events(events => events.Error("error_handler"))
+        .Create(create => create.Action("AddState", "State", new {Area = "CrunchAdmin"}).Type(HttpVerbs.Put))
+        .Read(read => read.Action("GetStates", "State", new { Area ="CrunchAdmin"}).Type(HttpVerbs.Get))
+        .Update(update => update.Action("UpdateState", "State", new { Area = "CrunchAdmin"}).Type(HttpVerbs.Post))
+        .Destroy(destroy => destroy.Action("DeleteState", "State", new {Area = "CrunchAdmin"}).Type(HttpVerbs.Delete))
+        )
+    .ToolBar(toolbar => {
+                            toolbar.Create().Text("new state");
+                            toolbar.Custom().Text("create all USA states")
+                                .Action("CreateAllUSAStates", "State", new {Area = "CrunchAdmin"});
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Sortable()
+    .Selectable()
+    .Pageable(p => p.PageSizes(true).Refresh(true))
+    .Scrollable(s => s.Height(500))
+    )
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}
+

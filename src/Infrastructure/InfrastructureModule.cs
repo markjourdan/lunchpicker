@@ -1,9 +1,12 @@
-﻿using Autofac;
+﻿using System.Security.Principal;
+using Autofac;
 using Common.Logging;
 using Dino;
+using LunchPicker.Domain.Factories;
 using LunchPicker.Domain.Repositories;
 using LunchPicker.Domain.Utilities;
 using LunchPicker.Infrastructure.Data;
+using LunchPicker.Infrastructure.Factories;
 using LunchPicker.Infrastructure.Repositories;
 using LunchPicker.Infrastructure.Utilities;
 
@@ -32,6 +35,10 @@ namespace LunchPicker.Infrastructure
             builder.Register(c => new AccountRepository(c.Resolve<IObjectContextProvider>()))
                 .As<IAccountRepository>()
                 .InstancePerLifetimeScope();
+
+            builder.Register(c => new CreateStates(c.Resolve<IPrincipal>()))
+                   .As<ICreateStates>()
+                   .InstancePerLifetimeScope();
         }
     }
 }

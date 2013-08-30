@@ -62,6 +62,7 @@
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserClique.cs" />
+    <Compile Include="Factories\ICreateStates.cs" />
     <Compile Include="IClock.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Dino;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
@@ -30,6 +31,11 @@ namespace LunchPicker.Infrastructure.Repositories
             ContextProvider.GetContext<LunchContext>().Add(restaurant);
         }
 
+        public void Add(State state)
+        {
+            ContextProvider.GetContext<LunchContext>().Add(state);
+        }
+
         public IQueryable<State> GetStates()
         {
             return FindAll<State>();
@@ -38,6 +44,19 @@ namespace LunchPicker.Infrastructure.Repositories
         public State GetState(int stateId)
         {
             return FindSingleOrDefault<State>(c => c.StateId == stateId);
+        }
+
+        public void DeleteState(State state)
+        {
+            ContextProvider.GetContext<LunchContext>().Delete(state);
+        }
+
+        public void Add(IEnumerable<State> states)
+        {
+            foreach (var state in states)
+            {
+                Add(state);
+            }
         }
     }
 }

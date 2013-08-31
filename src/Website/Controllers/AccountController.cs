@@ -34,7 +34,7 @@ namespace LunchPicker.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -71,6 +71,9 @@ namespace LunchPicker.Web.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password, new
                                                                                      {
+                                                                                        model.EmailAddress,
+                                                                                        model.FirstName,
+                                                                                        model.LastName,
                                                                                         LastUpdatedBy = User.Identity.Name,
                                                                                         CreatedBy = User.Identity.Name,
                                                                                         LastUpdatedDateUtc = Clock.UtcNow,
@@ -111,7 +114,7 @@ namespace LunchPicker.Web.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        public ActionResult Manage(ManageMessageId? message)
+        public ActionResult Manage(ManageMessageId? message, int? tabId = 0)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
@@ -120,13 +123,16 @@ namespace LunchPicker.Web.Controllers
                 : "";
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
+            ViewBag.Tab = tabId;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage(LocalPasswordModel model)
+        public ActionResult ChangePassword(AccountModel accountModel)
         {
+            var model = accountModel.LocalPassword;
+
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -147,9 +153,9 @@ namespace LunchPicker.Web.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess, TabId=1 });
                     }
-                    
+
                     ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
                 }
             }
@@ -157,7 +163,7 @@ namespace LunchPicker.Web.Controllers
             {
                 // User does not have a local password so remove any validation errors caused by a missing
                 // OldPassword field
-                ModelState state = ModelState["OldPassword"];
+                var state = ModelState["OldPassword"];
                 if (state != null)
                 {
                     state.Errors.Clear();
@@ -168,7 +174,7 @@ namespace LunchPicker.Web.Controllers
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess, TabId=1 });
                     }
                     catch (Exception)
                     {
@@ -178,7 +184,8 @@ namespace LunchPicker.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            ViewBag.Tab = 1;
+            return View("Manage", accountModel);
         }
 
         [HttpPost]
@@ -366,5 +373,30 @@ namespace LunchPicker.Web.Controllers
             }
         }
         #endregion
+
+        public ActionResult JoinClique(AccountModel model)
+        {
+            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
+            var clique = AccountRepository.GetClique(new Guid(model.CliqueJoin.CliqueKey));
+            user.Cliques.Add(clique);
+            _Session.Commit();
+
+            return RedirectToAction("Index", "Clique", new { Area = "Clique", clique.CliqueId });
+        }
+
+        public ActionResult CreateClique(AccountModel model)
+        {
+            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
+            var clique = new Clique(User)
+                             {
+                                 Name = model.CliqueCreate.CliqueName,
+                                 IsActive = true
+                             };
+            AccountRepository.AddClique(clique);
+            user.Cliques.Add(clique);
+            _Session.Commit();
+
+            return RedirectToAction("Index", "Clique", new {Area = "Clique", clique.CliqueId});
+        }
     }
 }

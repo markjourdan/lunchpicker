@@ -9,17 +9,20 @@ namespace LunchPicker.Domain.Entities
         public Clique()
         {
             LastUpdatedDateUtc = CreatedDateUtc = DateTime.UtcNow;
+            FriendlyKey = Guid.NewGuid();
         }
 
         public Clique(IPrincipal user)
         {
             LastUpdatedBy = CreatedBy = user.Identity.Name;
             LastUpdatedDateUtc = CreatedDateUtc = DateTime.UtcNow;
+            FriendlyKey = Guid.NewGuid();
         }
         
         public long CliqueId { get; set; }
         public string Name { get; set; }
         public bool IsActive { get; set; }
+        public Guid FriendlyKey { get; private set; }
         
         public string LastUpdatedBy { get; set; }
         public string CreatedBy { get; set; }

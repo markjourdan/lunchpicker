@@ -1,0 +1,57 @@
+﻿@model LunchPicker.Web.Models.Account.AccountModel
+
+
+@{ Html.BeginForm("JoinClique", "Account", new {Area = ""});}
+<fieldset>
+    <legend>join an existing clique</legend>
+    @Html.ValidationSummary()
+    <div class="clique-join">
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.CliqueJoin.CliqueKey)
+                @Html.TextBoxFor(m => m.CliqueJoin.CliqueKey, new {@class="k-textbox"})
+            </li>
+        </ul>
+    </div>
+    <input type="submit" value="join clique" class="k-button"/>
+</fieldset>
+@{Html.EndForm();}
+
+@{ Html.BeginForm("CreateClique", "Account", new {Area = ""});}
+<fieldset>
+    <legend>create a new clique</legend>
+    @Html.ValidationSummary()
+    <div class="clique-create">
+        <ul>
+            <li>
+                @Html.LabelFor(m => m.CliqueCreate.CliqueName)
+                @Html.TextBoxFor(m => m.CliqueCreate.CliqueName, new {@class="k-textbox"})
+            </li>
+        </ul>
+    </div>
+    <input type="submit" value="create clique" class="k-button"/>
+</fieldset>
+@{Html.EndForm();}
+
+
+<style>
+    .clique-create ul,
+    .clique-join ul
+    {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0;
+    }
+     .clique-create li, 
+     .clique-join li 
+     {
+         margin: 10px;
+     }
+    .clique-create label,
+    .clique-join label
+    {
+	    display:block;
+	    float:left;
+	    width:175px;
+    }
+</style>

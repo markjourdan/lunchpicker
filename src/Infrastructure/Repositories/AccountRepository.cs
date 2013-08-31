@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dino;
 using LunchPicker.Domain.Entities;
@@ -79,6 +80,11 @@ namespace LunchPicker.Infrastructure.Repositories
         public void DeleteUser(User userToDelete)
         {
             Delete(userToDelete);
+        }
+
+        public Clique GetClique(Guid friendlyKey)
+        {
+            return FindSingleOrDefault<Clique>(c => c.FriendlyKey == friendlyKey);
         }
     }
 }

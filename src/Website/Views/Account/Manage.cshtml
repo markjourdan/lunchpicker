@@ -1,4 +1,4 @@
-﻿@model LunchPicker.Web.Models.Account.LocalPasswordModel
+﻿@model LunchPicker.Web.Models.Account.AccountModel
 @{
     ViewBag.Title = "Manage Account";
 }
@@ -9,20 +9,34 @@
 
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+@(Html.Kendo().TabStrip()
+    .Name("AccountManagementTab")
+    .Items(tabstrip =>
+               {
+                   tabstrip.Add().Text("Cliques")
+                        .Selected(true)
+                        .Content(Html.Partial("Partial/CliqueTab").ToHtmlString()); 
+                   tabstrip.Add().Text("Password")
+                       .Content(Html.Partial("Partial/PasswordTab").ToHtmlString());
+               })
+    
+    )
 
-@if (ViewBag.HasLocalPassword)
-{
-    @Html.Partial("Partial/ChangePassword")
-}
-else
-{ 
-    @Html.Partial("Partial/SetPassword")
-}
-
-<section id="externalLogins">
+@*<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
 
     <h3>Add an external login</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+</section>*@
+
+@section documentReady
+{
+    onAccountManageReady();
+}
+
+<script type="text/javascript">
+    function onAccountManageReady() {
+        var tabStrip = $("#AccountManagementTab").data("kendoTabStrip");
+        tabStrip.select(@ViewBag.Tab);
+    }
+</script>

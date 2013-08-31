@@ -29,7 +29,6 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
                                  EmailAddress = u.EmailAddress,
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
-                                 Password = u.Password,
                                  UserId = u.UserId,
                                  UserName = u.UserName
                              })

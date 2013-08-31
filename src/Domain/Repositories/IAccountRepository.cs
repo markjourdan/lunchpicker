@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using LunchPicker.Domain.Entities;
 
 namespace LunchPicker.Domain.Repositories
@@ -17,5 +18,6 @@ namespace LunchPicker.Domain.Repositories
         Clique GetClique(long cliqueId);
         User GetUser(long userId);
         void DeleteUser(User userToDelete);
+        Clique GetClique(Guid friendlyKey);
     }
 }

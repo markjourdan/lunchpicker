@@ -224,6 +224,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\AccountModel.cs" />
+    <Compile Include="Models\Account\CliqueSignupModel.cs" />
     <Compile Include="Models\Account\ExternalLogin.cs" />
     <Compile Include="Models\Account\LocalPasswordModel.cs" />
     <Compile Include="Models\Account\LoginModel.cs" />
@@ -299,6 +301,8 @@
     <Content Include="Views\Account\Partial\RemoveExternalLogins.cshtml" />
     <Content Include="Views\Account\Partial\SetPassword.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Account\Partial\PasswordTab.cshtml" />
+    <Content Include="Views\Account\Partial\CliqueTab.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

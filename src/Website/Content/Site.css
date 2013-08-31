@@ -6,6 +6,15 @@
     background-color: #fff;
 }
 
+a {
+	border-bottom:solid 1px #5EB2D4;
+    text-decoration: none;
+}
+
+a:hover {
+	border-bottom:solid 1px #A5DA03;
+}
+
 .outer-wrapper,
 .outer-navigation,
 .outer-footer
@@ -66,7 +75,7 @@ h1
 .navigation { margin-top:10px; width:auto; margin-left:auto; margin-right:auto; }
 .navigation ul {list-style:none;margin:0;padding:0;}
 .navigation li {float:right;width:100px;margin:0;padding:0;text-align:center;}
-.navigation li a {display:block;padding:5px 10px; margin-left:5px; height:100%;color:#FFF;text-decoration:none;border-right:1px solid #FFF;}
+.navigation li a {border: none; display:block;padding:5px 10px; margin-left:5px; height:100%;color:#FFF;text-decoration:none;border-right:1px solid #FFF;}
 .navigation li a {background:url(bg2.jpg) repeat 0 0;}
 .navigation li a:hover, li a:focus, li a:active {background-position:-150px 0;}
 .navigation #a a {background:url(bg.jpg) repeat -20px 35px;}
@@ -75,7 +84,7 @@ h1
 .footer { margin-top:0; width:auto; margin-left:auto; margin-right:auto; }
 .footer ul {list-style:none;margin:0 auto;padding:0;}
 .footer li {float: right;margin:0;padding:0;text-align:right;}
-.footer li a {display: inline-block;padding:5px 10px; margin-left:5px; height:100%;color:#5eb2d4;text-decoration:none;border-right:1px solid #FFF;}
+.footer li a {border: none; display: inline-block;padding:5px 10px; margin-left:5px; height:100%;color:#5eb2d4;text-decoration:none;border-right:1px solid #FFF;}
 .footer li form {display: inline;}
 
 header,

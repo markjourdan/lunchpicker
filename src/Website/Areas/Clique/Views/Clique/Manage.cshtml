@@ -19,6 +19,10 @@
 </div>
 @{ Html.EndForm(); }
 
+<div id="clique-uniquekey">
+    <p>Here is the Clique's unique key that you can give to anyone to join @Model.Name: <strong>@Model.FriendlyKey</strong></p>
+</div>
+
 <style type="text/css">
     #clique-edit
     {
@@ -46,5 +50,11 @@
     #clique-edit .submit {
         text-align: right;
         padding-top: 5px;
+    }
+
+    #clique-uniquekey {
+        border: solid #5EB2D4 1px;
+        padding: 5px;
+        background: #E0E0E0;
     }
 </style>

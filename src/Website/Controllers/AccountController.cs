@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Dino;
@@ -116,6 +117,14 @@ namespace LunchPicker.Web.Controllers
 
         public ActionResult Manage(ManageMessageId? message, int? tabId = 0)
         {
+            var model = new AccountModel();
+            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
+            model.Cliques = user.Cliques.Select(c => new CliqueModel
+                                                         {
+                                                             Name = c.Name,
+                                                             CliqueId = c.CliqueId
+                                                         }).ToList();
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -124,7 +133,7 @@ namespace LunchPicker.Web.Controllers
             ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.ReturnUrl = Url.Action("Manage");
             ViewBag.Tab = tabId;
-            return View();
+            return View(model);
         }
 
         [HttpPost]

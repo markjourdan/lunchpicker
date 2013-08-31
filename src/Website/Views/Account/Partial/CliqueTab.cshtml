@@ -1,5 +1,21 @@
 ﻿@model LunchPicker.Web.Models.Account.AccountModel
 
+@if (Model.Cliques != null)
+{
+    <fieldset>
+        <legend>current cliques</legend>
+        <div class="clique-list">
+            <ul>
+                @foreach (var clique in Model.Cliques)
+                {
+                    <li>
+                        @Html.ActionLink(clique.Name, "Index", "Clique", new {Area = "Clique", clique.CliqueId}, null)
+                    </li>
+                }
+            </ul>
+        </div>
+    </fieldset>
+}
 
 @{ Html.BeginForm("JoinClique", "Account", new {Area = ""});}
 <fieldset>
@@ -36,7 +52,8 @@
 
 <style>
     .clique-create ul,
-    .clique-join ul
+    .clique-join ul,
+    .clique-list ul
     {
         list-style: none;
         padding: 0;
@@ -44,6 +61,7 @@
     }
      .clique-create li, 
      .clique-join li 
+     .clique-list li
      {
          margin: 10px;
      }

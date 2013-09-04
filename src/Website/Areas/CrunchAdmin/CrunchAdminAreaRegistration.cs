@@ -17,7 +17,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin
             context.MapRoute(
                 "CrunchAdmin_default",
                 "CrunchAdmin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller="Crunch", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

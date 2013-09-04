@@ -214,6 +214,7 @@
     <Compile Include="Areas\Clique\Models\Restaurant\RestaurantModel.cs" />
     <Compile Include="Areas\Clique\Models\Clique\StateModel.cs" />
     <Compile Include="Areas\Clique\Models\Users\UserModel.cs" />
+    <Compile Include="Areas\CrunchAdmin\Controllers\CrunchController.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\StateController.cs" />
     <Compile Include="Areas\CrunchAdmin\CrunchAdminAreaRegistration.cs" />
     <Compile Include="Areas\CrunchAdmin\Models\State\StateModel.cs" />
@@ -255,6 +256,7 @@
     <Content Include="Areas\CrunchAdmin\Views\Web.config" />
     <Content Include="Areas\CrunchAdmin\Views\State\Manage.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\CrunchAdmin\Views\Crunch\Index.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />

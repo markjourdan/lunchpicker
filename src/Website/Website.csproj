@@ -216,8 +216,11 @@
     <Compile Include="Areas\Clique\Models\Users\UserModel.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\CrunchController.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\StateController.cs" />
+    <Compile Include="Areas\CrunchAdmin\Controllers\UsersController.cs" />
     <Compile Include="Areas\CrunchAdmin\CrunchAdminAreaRegistration.cs" />
     <Compile Include="Areas\CrunchAdmin\Models\State\StateModel.cs" />
+    <Compile Include="Areas\CrunchAdmin\Models\Users\CliqueModel.cs" />
+    <Compile Include="Areas\CrunchAdmin\Models\Users\UserModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Framework\InitializeSimpleMembershipAttribute.cs" />
@@ -257,6 +260,7 @@
     <Content Include="Areas\CrunchAdmin\Views\State\Manage.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\Crunch\Index.cshtml" />
+    <Content Include="Areas\CrunchAdmin\Views\Users\Manage.cshtml" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -311,6 +315,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Clique\Views\Shared\" />
     <Folder Include="Areas\CrunchAdmin\Views\Shared\" />
+    <Folder Include="Areas\CrunchAdmin\Views\Users\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

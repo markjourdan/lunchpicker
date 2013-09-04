@@ -1,0 +1,62 @@
+﻿@using Kendo.Mvc.UI
+@using LunchPicker.Web.Areas.CrunchAdmin.Models.Users
+
+@{
+    ViewBag.Title = "Manage Users";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@(Html.Kendo()
+    .Grid<UserModel>()
+    .Name("Users")
+    .Columns(columns =>
+            {
+                columns.Bound(p => p.UserName).Width(175);
+                columns.Bound(p => p.FirstName).Width(125);
+                columns.Bound(p => p.LastName).Width(125);
+                columns.Bound(p => p.EmailAddress).Width(200);
+                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+            })
+    .DataSource(data => data.Ajax()
+        .PageSize(20)
+        .ServerOperation(false)
+        .Model(model =>
+            {
+                model.Id(p => p.UserId);
+                model.Field(column => column.UserId).Editable(false);
+            })
+        .Events(events => events.Error("error_handler"))
+        .Create(create => create.Action("AddUser", "Users", new {Area = "CrunchAdmin"}).Type(HttpVerbs.Put))
+        .Read(read => read.Action("GetUsers", "Users", new { Area ="CrunchAdmin"}).Type(HttpVerbs.Get))
+        .Update(update => update.Action("UpdateUser", "Users", new { Area = "CrunchAdmin"}).Type(HttpVerbs.Post))
+        .Destroy(destroy => destroy.Action("DeleteUser", "Users", new {Area = "CrunchAdmin"}).Type(HttpVerbs.Delete))
+        )
+    .ToolBar(toolbar => toolbar.Create().Text("new user"))
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Sortable()
+    .Selectable()
+    .Pageable(p => p.PageSizes(true).Refresh(true))
+    .Scrollable(s => s.Height(500))
+    )
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function(key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function() {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+}

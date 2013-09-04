@@ -19,5 +19,6 @@ namespace LunchPicker.Domain.Repositories
         User GetUser(long userId);
         void DeleteUser(User userToDelete);
         Clique GetClique(Guid friendlyKey);
+        IEnumerable<User> GetUsers();
     }
 }

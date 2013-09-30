@@ -36,7 +36,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         }
 
         [HttpPost]
-        public JsonResult UpdateUser(DataSourceRequest request, UserModel user)
+        public ActionResult UpdateUser(DataSourceRequest request, UserModel user)
         {
             if (user != null && ModelState.IsValid)
             {

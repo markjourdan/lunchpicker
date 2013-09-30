@@ -7,7 +7,6 @@ using LunchPicker.Domain;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
 using LunchPicker.Web.Areas.CrunchAdmin.Models.Users;
-using WebGrease.Css.Extensions;
 
 namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 {

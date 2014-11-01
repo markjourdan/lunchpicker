@@ -2,7 +2,25 @@
 
 <h2>Manage</h2>
 <ul>
-    <li>@Html.ActionLink("Clique", "Manage", "Clique", null, new { Area = "Clique" })</li>
-    <li>@Html.ActionLink("Restaurant's", "Manage", "Restaurant", null, new { Area = "Clique"})</li>
-    <li>@Html.ActionLink("User's", "Manage", "Users", null, new { Area = "Clique" })</li>
+    <li>@Html.Kendo().Button().Name("ManageClique").Content("CLique").Events(e => e.Click("manageClique"))</li>
+    <li>@Html.Kendo().Button().Name("ManageRestaurants").Content("Restaurant's").Events(e => e.Click("manageRestaurants"))</li>
+    <li>@Html.Kendo().Button().Name("ManageUsers").Content("User's").Events(e => e.Click("manageUsers"))</li>
 </ul>
+<script type="text/javascript">
+    function manageClique() {
+        window.location = '@Url.Action("Manage", "Clique", new { Area = "Clique" })';
+    }
+
+    function manageRestaurants() {
+        window.location = '@Url.Action("Manage", "Restaurant", new { Area = "Clique" })';
+    }
+
+    function manageUsers() {
+        window.location = '@Url.Action("Manage", "Users", new { Area = "Clique" })';
+    }
+</script>
+<style type="text/css">
+    li {
+        list-style: none;
+    }
+</style>

@@ -1,7 +1,22 @@
-﻿@model dynamic
+﻿@using Kendo.Mvc.UI
+@model dynamic
 
 <h2>Manage</h2>
 <ul>
-    <li>@Html.ActionLink("States", "Manage", "State", null, new { Area = "CrunchAdmin" })</li>
-    <li>@Html.ActionLink("Users", "Manage", "Users", null, new { Area = "CrunchAdmin" })</li>
+    <li>@Html.Kendo().Button().Name("ManageStates").Content("States").Events(e => e.Click("manageStates"))</li>
+    <li>@Html.Kendo().Button().Name("ManageUsers").Content("Users").Events(e => e.Click("manageUsers"))</li>
 </ul>
+<script type="text/javascript">
+    function manageStates() {
+        window.location = '@Url.Action("Manage", "State", new { Area = "CrunchAdmin" })';
+    }
+
+    function manageUsers() {
+        window.location = '@Url.Action("Manage", "Users", new { Area = "CrunchAdmin" })';
+    }
+</script>
+<style type="text/css">
+    li {
+        list-style: none;
+    }
+</style>

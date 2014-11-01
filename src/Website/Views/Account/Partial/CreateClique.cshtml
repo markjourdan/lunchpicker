@@ -1,0 +1,14 @@
+﻿@model LunchPicker.Web.Models.Account.AccountModel
+
+@{ Html.BeginForm("CreateClique", "Account", new { Area = "" });}
+@Html.ValidationSummary()
+<div class="clique-create">
+    <ul>
+        <li>
+            @Html.LabelFor(m => m.CliqueCreate.CliqueName)
+            @Html.TextBoxFor(m => m.CliqueCreate.CliqueName, new { @class = "k-textbox" })
+        </li>
+    </ul>
+</div>
+<input type="submit" value="create clique" class="k-primary k-button" />
+@{Html.EndForm();}

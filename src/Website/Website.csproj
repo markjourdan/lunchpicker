@@ -336,6 +336,8 @@
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Account\Partial\PasswordTab.cshtml" />
     <Content Include="Views\Account\Partial\CliqueTab.cshtml" />
+    <Content Include="Views\Account\Partial\CreateClique.cshtml" />
+    <Content Include="Views\Account\Partial\JoinClique.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,54 +1,30 @@
 ﻿@model LunchPicker.Web.Models.Account.AccountModel
 
-@if (Model.Cliques != null)
-{
-    <fieldset>
-        <legend>current cliques</legend>
-        <div class="clique-list">
-            <ul>
-                @foreach (var clique in Model.Cliques)
-                {
-                    <li>
-                        @Html.ActionLink(clique.Name, "Index", "Clique", new {Area = "Clique", clique.CliqueId}, null)
-                    </li>
-                }
-            </ul>
-        </div>
-    </fieldset>
-}
-
-@{ Html.BeginForm("JoinClique", "Account", new {Area = ""});}
-<fieldset>
-    <legend>join an existing clique</legend>
-    @Html.ValidationSummary()
-    <div class="clique-join">
-        <ul>
-            <li>
-                @Html.LabelFor(m => m.CliqueJoin.CliqueKey)
-                @Html.TextBoxFor(m => m.CliqueJoin.CliqueKey, new {@class="k-textbox"})
-            </li>
-        </ul>
-    </div>
-    <input type="submit" value="join clique" class="k-button"/>
-</fieldset>
-@{Html.EndForm();}
-
-@{ Html.BeginForm("CreateClique", "Account", new {Area = ""});}
-<fieldset>
-    <legend>create a new clique</legend>
-    @Html.ValidationSummary()
-    <div class="clique-create">
-        <ul>
-            <li>
-                @Html.LabelFor(m => m.CliqueCreate.CliqueName)
-                @Html.TextBoxFor(m => m.CliqueCreate.CliqueName, new {@class="k-textbox"})
-            </li>
-        </ul>
-    </div>
-    <input type="submit" value="create clique" class="k-button"/>
-</fieldset>
-@{Html.EndForm();}
-
+@(Html.Kendo().PanelBar()
+    .Name("CliqueTab")
+    .ExpandMode(PanelBarExpandMode.Single)
+    .Items(items =>
+        {
+            items.Add().Text("current cliques").Expanded(true).Selected(true).Content(@<div>
+                    @if (Model.Cliques != null)
+                    {
+                        <div class="clique-list">
+                            <ul>
+                                @foreach (var clique in Model.Cliques)
+                                {
+                                    <li>
+                                        @Html.ActionLink(clique.Name, "Index", "Clique", new { Area = "Clique", clique.CliqueId }, null)
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                </div>);
+            items.Add().Text("join an existing clique").Content(@Html.Partial("Partial/JoinClique", Model).ToHtmlString());
+            items.Add().Text("create a new clique").Content(@Html.Partial("Partial/CreateClique", Model).ToHtmlString());
+        }
+    )
+)
 
 <style>
     .clique-create ul,
@@ -71,5 +47,8 @@
 	    display:block;
 	    float:left;
 	    width:175px;
+    }
+    .k-panelbar .k-content {
+        padding: 10px;
     }
 </style>

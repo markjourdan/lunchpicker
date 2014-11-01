@@ -10,3 +10,4 @@ syntax: glob
 *.mdf
 *.ldf
 src/Website/Properties/PublishProfiles/**.user
+src/Website/Properties/PublishProfiles/markjourdan.pubxml

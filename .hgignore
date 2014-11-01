@@ -9,3 +9,4 @@ syntax: glob
 *.sdf
 *.mdf
 *.ldf
+src/Website/Properties/PublishProfiles/**.user

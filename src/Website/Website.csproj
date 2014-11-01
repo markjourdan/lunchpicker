@@ -265,7 +265,9 @@
     <Content Include="Content\bg.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\Clique\Views\Web.config" />
+    <Content Include="Areas\Clique\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Clique\Views\Restaurant\Manage.cshtml" />
     <Content Include="Areas\Clique\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Clique\Views\Restaurant\EditorTemplates\RestaurantModel.cshtml" />
@@ -274,7 +276,9 @@
     <Content Include="Areas\Clique\Views\Clique\Manage.cshtml" />
     <Content Include="Areas\Clique\Views\Restaurant\Patrial\Map.cshtml" />
     <Content Include="Areas\Clique\Views\Users\Manage.cshtml" />
-    <Content Include="Areas\CrunchAdmin\Views\Web.config" />
+    <Content Include="Areas\CrunchAdmin\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\CrunchAdmin\Views\State\Manage.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\Crunch\Index.cshtml" />
@@ -306,7 +310,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />

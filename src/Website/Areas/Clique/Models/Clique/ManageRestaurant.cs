@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using LunchPicker.Domain.Entities;
+using LunchPicker.Domain.DataTransferObject;
 
 namespace LunchPicker.Web.Areas.Clique.Models.Clique
 {
     public class ManageRestaurant
     {
-        public IEnumerable<State> States { get; set; } 
+        public IEnumerable<StateDto> States { get; set; } 
         public long CliqueId { get; set; }
     }
 }

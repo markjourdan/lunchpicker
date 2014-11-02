@@ -55,7 +55,7 @@ namespace LunchPicker.Domain.Entities
             if (State != null)
             {
                 stringBuilder.AppendLine(", ");
-                stringBuilder.AppendLine(State.Abreviation);
+                stringBuilder.AppendLine(State.Abbreviation);
             }
 
             stringBuilder.AppendLine(" ");
@@ -78,7 +78,7 @@ namespace LunchPicker.Domain.Entities
 
             stringBuilder.Append(City);
             stringBuilder.Append(", ");
-            stringBuilder.Append(State.Abreviation);
+            stringBuilder.Append(State.Abbreviation);
             stringBuilder.Append(" ");
             stringBuilder.Append(Zip);
 

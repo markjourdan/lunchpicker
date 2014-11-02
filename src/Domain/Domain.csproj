@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataTransferObject\RestaurantListingDto.cs" />
+    <Compile Include="DataTransferObject\StateDto.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Entities\Clique.cs" />
     <Compile Include="Entities\Language.cs" />

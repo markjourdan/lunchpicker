@@ -1,4 +1,4 @@
-﻿using LunchPicker.Domain.Entities;
+﻿using LunchPicker.Domain.DataTransferObject;
 
 namespace LunchPicker.Web.Areas.Clique.Models.Restaurant
 {
@@ -12,7 +12,6 @@ namespace LunchPicker.Web.Areas.Clique.Models.Restaurant
         public int? StateId { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }
-
-        public State State { get; set; }
+        public StateDto State { get; set; }
     }
 }

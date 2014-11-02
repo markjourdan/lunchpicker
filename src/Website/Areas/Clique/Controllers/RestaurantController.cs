@@ -4,9 +4,9 @@ using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using LunchPicker.Domain;
+using LunchPicker.Domain.DataTransferObject;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
-using LunchPicker.Web.Areas.Clique.Models;
 using LunchPicker.Web.Areas.Clique.Models.Clique;
 using LunchPicker.Web.Areas.Clique.Models.Restaurant;
 
@@ -26,10 +26,16 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult Manage()
         {
-            var model = new ManageRestaurant {States = LunchRepository.GetStates()};
+            var model = new ManageRestaurant {States = LunchRepository.GetStates().Select(s => new StateDto
+                                                                                               {
+                                                                                                   Abbreviation = s.Abbreviation,
+                                                                                                   FullName = s.FullName,
+                                                                                                   StateId = s.StateId
+                                                                                               })};
             return View(model);
         }
 
+        [HttpGet]
         public ActionResult GetRestaurants(DataSourceRequest request)
         {
             return Json(LunchRepository.GetRestaurants().Cast<Restaurant>()
@@ -41,10 +47,15 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
                                  City = r.City,
                                  Name = r.Name,
                                  Phone = r.Phone,
-                                 State = r.State,
+                                 State = new StateDto
+                                         {
+                                             Abbreviation = r.State.Abbreviation,
+                                             FullName = r.State.FullName,
+                                             StateId = r.State.StateId
+                                         },
                                  StateId = r.StateId,
                                  Zip = r.Zip
-                             }).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+                             }).ToDataSourceResult(request, ModelState), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -107,7 +118,12 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         [HttpGet]
         public ActionResult GetStates()
         {
-            var states = LunchRepository.GetStates();
+            var states = LunchRepository.GetStates().Select(s => new StateDto
+                                                                 {
+                                                                     Abbreviation = s.Abbreviation,
+                                                                     FullName = s.FullName,
+                                                                     StateId = s.StateId
+                                                                 });
 
             return new JsonResult {Data = states, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }

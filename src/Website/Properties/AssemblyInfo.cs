@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Fluffy Coding")]
 [assembly: AssemblyProduct("Lunch Picker")]
-[assembly: AssemblyCopyright("Fluffy Coding ©  2013")]
+[assembly: AssemblyCopyright("Fluffy Coding ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

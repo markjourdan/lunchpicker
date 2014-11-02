@@ -21,9 +21,9 @@ namespace LunchPicker.Infrastructure.Factories
 
             foreach (var usaState in USAStates)
             {
-                if (existingStates.All(a => a.Abreviation != usaState.Key))
+                if (existingStates.All(a => a.Abbreviation != usaState.Key))
                 {
-                    newStates.Add(new State(_principal) { Abreviation = usaState.Key, FullName = usaState.Value});
+                    newStates.Add(new State(_principal) { Abbreviation = usaState.Key, FullName = usaState.Value});
                 }
             }
 

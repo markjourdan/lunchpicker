@@ -18,7 +18,7 @@ namespace LunchPicker.Domain.Entities
 
         public int StateId { get; set; }
         public string FullName { get; set; }
-        public string Abreviation { get; set; }
+        public string Abbreviation { get; set; }
 
         public string LastUpdatedBy { get; set; }
         public string CreatedBy { get; set; }

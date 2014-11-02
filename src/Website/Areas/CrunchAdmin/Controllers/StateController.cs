@@ -29,7 +29,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
             return Json(LunchRepository.GetStates().Cast<State>()
                 .Select(s => new StateModel
                             {
-                                Abreviation = s.Abreviation,
+                                Abreviation = s.Abbreviation,
                                 FullName = s.FullName,
                                 StateId = s.StateId
                             })
@@ -56,7 +56,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
                 if (target != null)
                 {
-                    target.Abreviation = state.Abreviation;
+                    target.Abbreviation = state.Abbreviation;
                     target.FullName = state.FullName;
                     target.Update(User);
                     _Session.Commit();

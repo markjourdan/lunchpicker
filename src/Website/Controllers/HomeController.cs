@@ -8,7 +8,6 @@ using Kendo.Mvc.UI;
 using LunchPicker.Domain.DataTransferObject;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
-using LunchPicker.Web.Areas.Clique.Models;
 using LunchPicker.Web.Areas.Clique.Models.Restaurant;
 
 namespace LunchPicker.Web.Controllers
@@ -45,18 +44,23 @@ namespace LunchPicker.Web.Controllers
                                                                        Address2 = a.Address2,
                                                                        City = a.City,
                                                                        Phone = a.Phone,
-                                                                       State = a.State,
+                                                                       State = new StateDto
+                                                                               {
+                                                                                   Abbreviation = a.State.Abbreviation,
+                                                                                   FullName = a.State.FullName,
+                                                                                   StateId = a.State.StateId
+                                                                               },
                                                                        Address1 = a.Address1,
                                                                        Zip = a.Zip
                                                                    }).First(), JsonRequestBehavior.AllowGet);
         }
         
-        [HttpGet]
-        public ActionResult GetResturantRanking(DataSourceRequest request)
+        [HttpPost]
+        public ActionResult GetRestaurantRanking(DataSourceRequest request)
         {
             var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(LunchRepository.GetRestaurants()).OrderByDescending(r => r.Rating);
 
-            return Json(restaurants.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return Json(restaurants.ToDataSourceResult(request));
         }
     }
 }

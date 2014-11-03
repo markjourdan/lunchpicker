@@ -5,6 +5,7 @@ namespace LunchPicker.Web.Areas.Clique.Models.Restaurant
     public class RestaurantModel
     {
         public long RestaurantId { get; set; }
+        public long CliqueId { get; set; }
         public string Name { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

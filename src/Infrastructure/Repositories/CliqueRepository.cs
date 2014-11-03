@@ -20,6 +20,12 @@ namespace LunchPicker.Infrastructure.Repositories
         {
             return ContextProvider.GetContext<LunchContext>().Query<Clique>();
         }
+
+        public IEnumerable<Clique> GetCliquesByUser(string userName)
+        {
+            return FindSingleOrDefault<User>(c => c.UserName == userName).Cliques;
+        }
+
         public void AddClique(Clique clique)
         {
             ContextProvider.GetContext<LunchContext>().Add(clique);

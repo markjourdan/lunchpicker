@@ -1,69 +1,89 @@
 ﻿@using LunchPicker.Domain.DataTransferObject
-@model dynamic
+@model LunchPicker.Web.Models.Home.RestaurantRankingModel
 
 @{
     ViewBag.Title = "Restaurant Ranking";
 }
 
 <div style="width: 98%; margin: 1%;">
-
-    <script type="text/x-kendo-tmpl" id="RestaurantItem">
-        <p>
-            <div class="listing">
-                <span class="rating">${Rating}</span> 
-                <span class="restaurant"><a href='/Clique/${CliqueId}/Restaurant/About/${RestaurantId}'>${Name}</a></span>
-            </div>
-        </p>    
-    </script>
     
-    <div style="width:98%; margin:1%;">
-        @(Html.Kendo()
-            .ListView<RestaurantListingDto>()
-            .Name("Restaurants")
-            .TagName("div")
-            .HtmlAttributes(new {@class = "list"})
-            .ClientTemplateId("RestaurantItem")
-            .DataSource(data => data.Read(read => read.Action("GetRestaurantRanking", "Home")))
+    @if (!Model.Cliques.Any())
+    {
+        <text><div class="warning-noclique">You currently aren't associated with any Clique's. Please join one today to begin lunch crunching!</div></text>
+    }
+    else
+    {
+        @(Html.Kendo().PanelBar()
+              .Name("RestaurantRankings")
+              .Items(items =>
+                     {
+                         foreach (var cliqueDto in Model.Cliques)
+                         {
+                             items.Add().Text(cliqueDto.Name + " Rankings:")
+                                 .Expanded(true)
+                                 .Content(@<div style='width: 98%; margin: 1%;'>
+                                               @(Html.Kendo()
+                                                     .ListView<RestaurantListingDto>()
+                                                     .Name("Restaurants_" + cliqueDto.CliqueId)
+                                                     .TagName("div")
+                                                     .HtmlAttributes(new {@class = "list"})
+                                                     .ClientTemplateId("RestaurantItem")
+                                                     .DataSource(data => data.Read(read => read.Action("GetRestaurantRanking", "Home", new {cliqueId = @cliqueDto.CliqueId})))
+                                                     )
+                                           </div>);
+                         }
+                     })
               )
-    </div>
+    }
 </div>
 
-@section Head
-{
-    <style type="text/css">
-        .list
-        {
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-            border: none;
-        }
+<script type="text/x-kendo-tmpl" id="RestaurantItem">
+    <p>
+        <div class="listing">
+            <span class="rating">${Rating}</span>
+            <span class="restaurant"><a href='/Clique/${CliqueId}/Restaurant/About/${RestaurantId}'>${Name}</a></span>
+        </div>
+    </p>
+</script>
 
-        .listing
-        {
-            height: 30px;
-            border-bottom: solid 1px #666666;
-            width: 100%;
-            text-align: left;
-            vertical-align: middle;
-        }
+<style type="text/css">
+    .list
+    {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        border: none;
+    }
 
-        .rating
-        {
-            border: solid 2px #5EB2D4;
-            padding: 5px;
-            font-weight: bold;
-            color: #293955;
-            width: 10px;
-        }
+    .listing
+    {
+        height: 30px;
+        border-bottom: solid 1px #666666;
+        width: 100%;
+        text-align: left;
+        vertical-align: middle;
+    }
 
-        .restaurant,
-        .restaurant a
-        {
-            text-decoration: none;
-            font-weight: bold;
-            color: #293955;
-        }
-    </style>
-}
+    .rating
+    {
+        border: solid 2px #5EB2D4;
+        padding: 5px;
+        font-weight: bold;
+        color: #293955;
+        width: 10px;
+    }
+
+    .restaurant,
+    .restaurant a
+    {
+        text-decoration: none;
+        font-weight: bold;
+        color: #293955;
+    }
+    .warning-noclique {
+        padding-top: 100px;
+        color: red;
+        text-align: center;
+    }
+</style>

@@ -8,6 +8,7 @@ namespace LunchPicker.Domain.Repositories
     {
         Clique GetClique(Guid friendlyKey);
         IEnumerable<Clique> GetCliques();
+        IEnumerable<Clique> GetCliquesByUser(string userName); 
         void AddClique(Clique clique);
         Clique GetClique(long cliqueId);
     }

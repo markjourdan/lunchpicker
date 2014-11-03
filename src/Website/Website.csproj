@@ -236,10 +236,12 @@
     <Compile Include="Areas\Clique\Models\Restaurant\RestaurantModel.cs" />
     <Compile Include="Areas\Clique\Models\Clique\StateModel.cs" />
     <Compile Include="Areas\Clique\Models\Users\UserModel.cs" />
+    <Compile Include="Areas\CrunchAdmin\Controllers\CliquesController.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\CrunchController.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\StateController.cs" />
     <Compile Include="Areas\CrunchAdmin\Controllers\UsersController.cs" />
     <Compile Include="Areas\CrunchAdmin\CrunchAdminAreaRegistration.cs" />
+    <Compile Include="Areas\CrunchAdmin\Models\Cliques\CliqueModel.cs" />
     <Compile Include="Areas\CrunchAdmin\Models\State\StateModel.cs" />
     <Compile Include="Areas\CrunchAdmin\Models\Users\CliqueModel.cs" />
     <Compile Include="Areas\CrunchAdmin\Models\Users\UserModel.cs" />
@@ -289,6 +291,7 @@
     <Content Include="Areas\CrunchAdmin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\Crunch\Index.cshtml" />
     <Content Include="Areas\CrunchAdmin\Views\Users\Manage.cshtml" />
+    <Content Include="Areas\CrunchAdmin\Views\Cliques\Manage.cshtml" />
     <None Include="Properties\PublishProfiles\markjourdan.pubxml" />
     <None Include="Properties\PublishProfiles\ProductionDeploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

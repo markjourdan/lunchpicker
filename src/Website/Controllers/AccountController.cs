@@ -429,7 +429,7 @@ namespace LunchPicker.Web.Controllers
                                  Name = model.CliqueCreate.CliqueName,
                                  IsActive = true
                              };
-            CliqueRepository.AddClique(clique);
+            CliqueRepository.Add(clique);
             user.Cliques.Add(clique);
             _Session.Commit();
 

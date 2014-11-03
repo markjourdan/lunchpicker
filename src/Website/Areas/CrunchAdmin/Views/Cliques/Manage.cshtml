@@ -1,0 +1,61 @@
+﻿@using Kendo.Mvc.UI
+@using LunchPicker.Web.Areas.CrunchAdmin.Models.Cliques
+@model dynamic
+
+@{
+    ViewBag.Title = "Manage Cliques";
+}
+
+<h2>Manage Cliques</h2>
+@(Html.Kendo()
+    .Grid<CliqueModel>()
+    .Name("Cliques")
+    .Columns(columns =>
+            {
+                columns.Bound(p => p.Name).Width(200);
+                columns.Bound(p => p.FriendlyKey).Width(200);
+                columns.Bound(p => p.IsActive)
+                    .ClientTemplate("<input type='checkbox' #= IsActive ? checked='checked': '' # class='k-checkbox' disabled='disabled' />").Width(50);
+                columns.Command(command => { command.Edit().Text(" "); command.Destroy().Text(" "); }).Width(130);
+            })
+    .DataSource(data => data.Ajax()
+        .PageSize(50)
+        .ServerOperation(false)
+        .Model(model =>
+            {
+                model.Id(p => p.CliqueId);
+                model.Field(column => column.FriendlyKey).Editable(false);
+            })
+        .Sort(a => a.Add(o => o.Name))
+        .Events(events => events.Error("error_handler"))
+        .Create(create => create.Action("Add", "Cliques", new { Area = "CrunchAdmin" }).Type(HttpVerbs.Put))
+        .Read(read => read.Action("GetCliques", "Cliques", new { Area = "CrunchAdmin" }).Type(HttpVerbs.Get))
+        .Update(update => update.Action("UpdateClique", "Cliques", new { Area = "CrunchAdmin" }).Type(HttpVerbs.Post))
+        .Destroy(destroy => destroy.Action("DeleteClique", "Cliques", new { Area = "CrunchAdmin" }).Type(HttpVerbs.Delete))
+        )
+    .ToolBar(toolbar =>
+    {
+        toolbar.Create().Text("new clique");
+    })
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Sortable()
+    .Selectable()
+    .Pageable(p => p.PageSizes(true).Refresh(true))
+    .Scrollable(s => s.Height(500))
+)
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

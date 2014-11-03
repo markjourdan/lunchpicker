@@ -26,13 +26,18 @@ namespace LunchPicker.Infrastructure.Repositories
             return FindSingleOrDefault<User>(c => c.UserName == userName).Cliques;
         }
 
-        public void AddClique(Clique clique)
+        public void Add(Clique clique)
         {
             ContextProvider.GetContext<LunchContext>().Add(clique);
         }
         public Clique GetClique(long cliqueId)
         {
             return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId);
+        }
+
+        public void Delete(Clique clique)
+        {
+            base.Delete(clique);
         }
     }
 }

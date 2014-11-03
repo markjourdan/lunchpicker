@@ -5,6 +5,7 @@
 <ul>
     <li>@Html.Kendo().Button().Name("ManageStates").Content("States").Events(e => e.Click("manageStates"))</li>
     <li>@Html.Kendo().Button().Name("ManageUsers").Content("Users").Events(e => e.Click("manageUsers"))</li>
+    <li>@Html.Kendo().Button().Name("ManageCliques").Content("Clique's").Events(e => e.Click("manageCliques"))</li>
 </ul>
 <script type="text/javascript">
     function manageStates() {
@@ -13,6 +14,9 @@
 
     function manageUsers() {
         window.location = '@Url.Action("Manage", "Users", new { Area = "CrunchAdmin" })';
+    }
+    function manageCliques() {
+        window.location = '@Url.Action("Manage", "Cliques", new { Area = "CrunchAdmin" })';
     }
 </script>
 <style type="text/css">

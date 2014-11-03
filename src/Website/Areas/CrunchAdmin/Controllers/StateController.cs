@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Dino;
 using Kendo.Mvc.Extensions;
@@ -14,7 +13,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 {
     public class StateController : Controller
     {
-        public ILunchRepository LunchRepository { get; set; }
+        public IStateRepository StateRepository { get; set; }
         public ICreateStates CreateStates { get; set; }
         public ISession _Session { get; set; }
         public IClock Clock { get; set; }
@@ -26,7 +25,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
         public ActionResult GetStates(DataSourceRequest request)
         {
-            return Json(LunchRepository.GetStates().Cast<State>()
+            return Json(StateRepository.GetStates().Cast<State>()
                 .Select(s => new StateModel
                             {
                                 Abreviation = s.Abbreviation,
@@ -38,9 +37,9 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
         public ActionResult CreateAllUSAStates()
         {
-            var states = LunchRepository.GetStates().ToList();
+            var states = StateRepository.GetStates().ToList();
 
-            LunchRepository.Add(CreateStates.USA(states));
+            StateRepository.Add(CreateStates.USA(states));
 
             _Session.Commit();
 
@@ -52,7 +51,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
         {
             if (state != null && ModelState.IsValid)
             {
-                var target = LunchRepository.GetState(state.StateId);
+                var target = StateRepository.GetState(state.StateId);
 
                 if (target != null)
                 {
@@ -71,8 +70,8 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
         {
             if (state != null)
             {
-                var toDelete = LunchRepository.GetState(state.StateId);
-                LunchRepository.DeleteState(toDelete);
+                var toDelete = StateRepository.GetState(state.StateId);
+                StateRepository.DeleteState(toDelete);
 
                 _Session.Commit();
             }
@@ -88,7 +87,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
             if (ModelState.IsValid)
             {
-                LunchRepository.Add(state);
+                StateRepository.Add(state);
 
                 _Session.Commit();
             }

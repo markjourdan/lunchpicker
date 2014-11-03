@@ -89,9 +89,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\AccountRepository.cs" />
-    <Compile Include="Repositories\LunchRepository.cs" />
+    <Compile Include="Repositories\CliqueRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\RestaurantRepository.cs" />
     <Compile Include="Utilities\EncryptionUtility.cs" />
   </ItemGroup>
   <ItemGroup>

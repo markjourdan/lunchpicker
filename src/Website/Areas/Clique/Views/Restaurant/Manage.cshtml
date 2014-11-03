@@ -4,20 +4,24 @@
 @{
     ViewBag.Title = "manage restaurants";
 }
-<h1>Manage Your Restaurants</h1>
+<h1>Manage <span class="clique-name">@Model.Clique.Name</span> Restaurants</h1>
 
 @(Html.Kendo()
     .Grid<RestaurantModel>()
     .Name("Restaurants")
     .Columns(columns =>
             {
-                columns.Bound(p => p.Name);
-                columns.Bound(p => p.Address1).Width(100);
-                columns.Bound(p => p.Address2).Width(100).Hidden(true);
-                columns.Bound(p => p.City).Width(140);
+                columns.Bound(p => p.Name).Width(150);
+                columns.Bound(p => p.Address1).Width(200);
+                columns.Bound(p => p.Address2).Width(200).Hidden(true);
+                columns.Bound(p => p.City).Width(150);
                 columns.ForeignKey(p => p.StateId, Model.States, "StateId", "FullName").Title("State").Width(100);
                 columns.Bound(p => p.Zip).Width(100);
-                columns.Command(command => { command.Edit(); command.Destroy(); }).Width(200);
+                columns.Command(command =>
+                                {
+                                    command.Edit().Text(" ").CancelText(" ").UpdateText(" ");
+                                    command.Destroy().Text(" ");
+                                }).Width(175);
             })
     .DataSource(data => data.Ajax()
         .PageSize(20)
@@ -26,68 +30,71 @@
             {
                 model.Id(p => p.RestaurantId);
                 model.Field(column => column.RestaurantId).Editable(false);
-                //model.Field("CliqueId", typeof(int)).DefaultValue(@Model.CliqueId);
             })
+        .Sort(s => s.Add(a => a.Name))
         .Events(events => events.Error("error_handler"))
         .Create(create => create.Action("AddRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Put))
         .Read(read => read.Action("GetRestaurants", "Restaurant", new { Area ="Clique"}).Type(HttpVerbs.Get))
         .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
         .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
-        )
+    )
     .ToolBar(toolbar => toolbar.Create().Text("new restaurant"))
     .Events(e => e.Save("SaveRestaurant"))
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
     .Sortable()
     .Selectable()
+    .Filterable()
     .Pageable(p => p.PageSizes(true).Refresh(true))
     .Scrollable(s => s.Height(500))
     )
 
+<style type="text/css">
+    .clique-name {
+        color: #dc143c;
+    }
+</style>
 
-@section scripts
-{
-    <script type="text/javascript">
-        function error_handler(e) {
-            if (e.errors) {
-                var message = "Errors:\n";
-                $.each(e.errors, function(key, value) {
-                    if ('errors' in value) {
-                        $.each(value.errors, function() {
-                            message += this + "\n";
-                        });
-                    }
-                });
-                alert(message);
-            }
-        }
-
-        function SaveRestaurant(e) {
-            if (typeof e.model.State !== "undefined") {
-                e.model.StateId = e.model.State.StateId;
-            }
-        }
-
-        function serialize(prefix, data) {
-            var result = {},
-                dateRegex = /^\/Date\((.*?)\)\/$/;
-            for (var i = 0; i < data.length; i++) {
-                for (var field in data[i]) {
-                    var value = data[i][field];
-                    if (typeof value === "string") {
-                        var date = dateRegex.exec(value);
-                        if (date) {
-                            value = kendo.toString(new Date(parseInt(date[1])), "d");
-                        }
-                    }
-                    if (typeof value === "object") {
-                        value = serialize(field, $.makeArray(value));
-                    }
-                    result[prefix + "[" + i + "]." + field] = value;
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function(key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
                 }
-            }
+            });
+            alert(message);
+        }
+    }
 
-            return result;
+    function SaveRestaurant(e) {
+        if (typeof e.model.State !== "undefined") {
+            e.model.StateId = e.model.State.StateId;
+        }
+    }
+
+    function serialize(prefix, data) {
+        var result = {},
+            dateRegex = /^\/Date\((.*?)\)\/$/;
+        for (var i = 0; i < data.length; i++) {
+            for (var field in data[i]) {
+                var value = data[i][field];
+                if (typeof value === "string") {
+                    var date = dateRegex.exec(value);
+                    if (date) {
+                        value = kendo.toString(new Date(parseInt(date[1])), "d");
+                    }
+                }
+                if (typeof value === "object") {
+                    value = serialize(field, $.makeArray(value));
+                }
+                result[prefix + "[" + i + "]." + field] = value;
+            }
         }
 
-    </script>
-}
+        return result;
+    }
+
+</script>

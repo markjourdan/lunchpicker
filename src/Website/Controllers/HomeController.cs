@@ -14,7 +14,7 @@ namespace LunchPicker.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ILunchRepository LunchRepository { get; set; }
+        public IRestaurantRepository RestaurantRepository { get; set; }
 
         public ActionResult Index()
         {
@@ -29,7 +29,7 @@ namespace LunchPicker.Web.Controllers
         [HttpGet]
         public ActionResult GetRestaurantPick()
         {
-            var resturants = LunchRepository.GetRestaurants();
+            var resturants = RestaurantRepository.GetRestaurants();
 
             var rand = new Random();
 
@@ -58,7 +58,7 @@ namespace LunchPicker.Web.Controllers
         [HttpPost]
         public ActionResult GetRestaurantRanking(DataSourceRequest request)
         {
-            var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(LunchRepository.GetRestaurants()).OrderByDescending(r => r.Rating);
+            var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(RestaurantRepository.GetRestaurants()).OrderByDescending(r => r.Rating);
 
             return Json(restaurants.ToDataSourceResult(request));
         }

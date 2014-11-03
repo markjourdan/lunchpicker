@@ -14,18 +14,18 @@ namespace Tests.Website.Areas.Clique.Restaurant
     public class AddRestaurant
     {
         private RestaurantController _controller;
-        private ILunchRepository _lunchRepository;
+        private IRestaurantRepository _restaurantRepository;
         private ControllerContext _controllerContext;
         private ISession _session;
         [SetUp]
         public void Setup()
         {
-            _lunchRepository = MockRepository.GenerateMock<ILunchRepository>();
+            _restaurantRepository = MockRepository.GenerateMock<IRestaurantRepository>();
             _session = MockRepository.GenerateMock<ISession>();
             _controllerContext = MockRepository.GenerateMock<ControllerContext>();
             _controllerContext.Stub(s => s.HttpContext.User.Identity.Name).Return("User");
 
-            _controller = new RestaurantController { Clock = new Clock(), LunchRepository = _lunchRepository, ControllerContext = _controllerContext, _Session = _session};
+            _controller = new RestaurantController { Clock = new Clock(), RestaurantRepository = _restaurantRepository, ControllerContext = _controllerContext, _Session = _session};
         }
 
         [TearDown]

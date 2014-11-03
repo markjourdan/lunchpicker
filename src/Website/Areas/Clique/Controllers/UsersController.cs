@@ -12,7 +12,8 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 {
     public class UsersController : Controller
     {
-        public IAccountRepository AccountRepository { get; set; }
+        public ICliqueRepository CliqueRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
         public ISession _Session { get; set; }
         public IClock Clock { get; set; }
 
@@ -23,7 +24,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult GetUsers(DataSourceRequest request, long cliqueId)
         {
-            return Json(AccountRepository.GetUsers(cliqueId)
+            return Json(UserRepository.GetUsers(cliqueId)
                 .Select(u => new UserModel
                              {
                                  EmailAddress = u.EmailAddress,
@@ -40,7 +41,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (user != null && ModelState.IsValid)
             {
-                var target = AccountRepository.GetUser(user.UserId);
+                var target = UserRepository.GetUser(user.UserId);
 
                 if (target != null)
                 {
@@ -60,8 +61,8 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (user != null)
             {
-                var userToDelete = AccountRepository.GetUser(user.UserId);
-                AccountRepository.DeleteUser(userToDelete);
+                var userToDelete = UserRepository.GetUser(user.UserId);
+                UserRepository.DeleteUser(userToDelete);
 
                 _Session.Commit();
             }
@@ -77,8 +78,8 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
             if (ModelState.IsValid)
             {
-                var clique = AccountRepository.GetClique(cliqueId);
-                AccountRepository.AddUser(user, clique);
+                var clique = CliqueRepository.GetClique(cliqueId);
+                UserRepository.AddUser(user, clique);
 
                 _Session.Commit();
             }

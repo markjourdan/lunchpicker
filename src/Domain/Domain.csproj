@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataTransferObject\CliqueDto.cs" />
     <Compile Include="DataTransferObject\RestaurantListingDto.cs" />
     <Compile Include="DataTransferObject\StateDto.cs" />
     <Compile Include="DomainModule.cs" />
@@ -67,8 +68,10 @@
     <Compile Include="IClock.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IAccountRepository.cs" />
-    <Compile Include="Repositories\ILunchRepository.cs" />
+    <Compile Include="Repositories\ICliqueRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\IStateRepository.cs" />
+    <Compile Include="Repositories\IRestaurantRepository.cs" />
     <Compile Include="Utilities\IEncryptionUtility.cs" />
   </ItemGroup>
   <ItemGroup>

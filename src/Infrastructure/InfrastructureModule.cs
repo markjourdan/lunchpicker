@@ -28,12 +28,20 @@ namespace LunchPicker.Infrastructure
                 .As<ISession>().As<IObjectContextProvider>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new LunchRepository(c.Resolve<IObjectContextProvider>()))
-                .As<ILunchRepository>()
+            builder.Register(c => new RestaurantRepository(c.Resolve<IObjectContextProvider>()))
+                .As<IRestaurantRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new AccountRepository(c.Resolve<IObjectContextProvider>()))
-                .As<IAccountRepository>()
+            builder.Register(c => new StateRepository(c.Resolve<IObjectContextProvider>()))
+                .As<IStateRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new UserRepository(c.Resolve<IObjectContextProvider>()))
+                .As<IUserRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new CliqueRepository(c.Resolve<IObjectContextProvider>()))
+                .As<ICliqueRepository>()
                 .InstancePerLifetimeScope();
 
             builder.Register(c => new CreateStates(c.Resolve<IPrincipal>()))

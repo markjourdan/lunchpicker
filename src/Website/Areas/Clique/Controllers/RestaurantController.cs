@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Dino;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -14,31 +15,37 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 {
     public class RestaurantController : Controller
     {
-        public ILunchRepository LunchRepository { get; set; }
+        public IRestaurantRepository RestaurantRepository { get; set; }
+        public ICliqueRepository CliqueRepository { get; set; }
+        public IStateRepository StateRepository { get; set; }
         public IClock Clock { get; set; }
         public ISession _Session { get; set; }
 
         public ActionResult About(long id)
         {
-            var model = LunchRepository.GetRestaurant(id);
+            var model = RestaurantRepository.GetRestaurant(id);
             return View(model);
         }
 
-        public ActionResult Manage()
+        public ActionResult Manage(long cliqueId)
         {
-            var model = new ManageRestaurant {States = LunchRepository.GetStates().Select(s => new StateDto
-                                                                                               {
-                                                                                                   Abbreviation = s.Abbreviation,
-                                                                                                   FullName = s.FullName,
-                                                                                                   StateId = s.StateId
-                                                                                               })};
+            var model = new ManageRestaurant
+                        {
+                            States = StateRepository.GetStates().Select(s => new StateDto
+                                                                             {
+                                                                                 Abbreviation = s.Abbreviation,
+                                                                                 FullName = s.FullName,
+                                                                                 StateId = s.StateId
+                                                                             }),
+                                                                             Clique = Mapper.DynamicMap<CliqueDto>(CliqueRepository.GetClique(cliqueId))
+                        };
             return View(model);
         }
 
         [HttpGet]
         public ActionResult GetRestaurants(DataSourceRequest request, int cliqueId)
         {
-            return Json(LunchRepository.GetRestaurants(cliqueId).Cast<Restaurant>()
+            return Json(RestaurantRepository.GetRestaurants(cliqueId).Cast<Restaurant>()
                 .Select(r => new RestaurantModel
                              {
                                  RestaurantId = r.RestaurantId,
@@ -63,7 +70,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (restaurant != null && ModelState.IsValid)
             {
-                var target = LunchRepository.GetRestaurant(restaurant.RestaurantId);
+                var target = RestaurantRepository.GetRestaurant(restaurant.RestaurantId);
 
                 if (target != null)
                 {
@@ -88,8 +95,8 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             if (restaurant != null)
             {
-                var restaurantToDelete = LunchRepository.GetRestaurant(restaurant.RestaurantId);
-                LunchRepository.DeleteRestaurant(restaurantToDelete);
+                var restaurantToDelete = RestaurantRepository.GetRestaurant(restaurant.RestaurantId);
+                RestaurantRepository.DeleteRestaurant(restaurantToDelete);
 
                 _Session.Commit();
             }
@@ -106,9 +113,9 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
             if (ModelState.IsValid)
             {
                 if (restaurant.StateId.HasValue)
-                    restaurant.State = LunchRepository.GetState(restaurant.StateId.GetValueOrDefault());
+                    restaurant.State = StateRepository.GetState(restaurant.StateId.GetValueOrDefault());
 
-                LunchRepository.Add(restaurant);
+                RestaurantRepository.Add(restaurant);
                 _Session.Commit();
             }
 
@@ -118,7 +125,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         [HttpGet]
         public ActionResult GetStates()
         {
-            var states = LunchRepository.GetStates().Select(s => new StateDto
+            var states = StateRepository.GetStates().Select(s => new StateDto
                                                                  {
                                                                      Abbreviation = s.Abbreviation,
                                                                      FullName = s.FullName,

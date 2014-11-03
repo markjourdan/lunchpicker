@@ -19,7 +19,8 @@ namespace LunchPicker.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        public IAccountRepository AccountRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
+        public ICliqueRepository CliqueRepository { get; set; }
         public ISession _Session { get; set; }
         public IClock Clock { get; set; }
 
@@ -118,7 +119,7 @@ namespace LunchPicker.Web.Controllers
         public ActionResult Manage(ManageMessageId? message, int? tabId = 0)
         {
             var model = new AccountModel();
-            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
+            var user = UserRepository.GetUserByUserName(User.Identity.Name);
             model.Cliques = user.Cliques.Select(c => new CliqueModel
                                                          {
                                                              Name = c.Name,
@@ -249,7 +250,7 @@ namespace LunchPicker.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                var user = AccountRepository.GetUserByUserName(model.UserName.ToLower());
+                var user = UserRepository.GetUserByUserName(model.UserName.ToLower());
                 // Check if user already exists
                 if (user == null)
                 {
@@ -257,7 +258,7 @@ namespace LunchPicker.Web.Controllers
                            {
                                UserName = model.UserName
                            };
-                    AccountRepository.AddUser(user);
+                    UserRepository.AddUser(user);
                     _Session.Commit();
 
                     OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -385,8 +386,8 @@ namespace LunchPicker.Web.Controllers
 
         public ActionResult JoinClique(AccountModel model)
         {
-            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
-            var clique = AccountRepository.GetClique(new Guid(model.CliqueJoin.CliqueKey));
+            var user = UserRepository.GetUserByUserName(User.Identity.Name);
+            var clique = CliqueRepository.GetClique(new Guid(model.CliqueJoin.CliqueKey));
             user.Cliques.Add(clique);
             _Session.Commit();
 
@@ -395,13 +396,13 @@ namespace LunchPicker.Web.Controllers
 
         public ActionResult CreateClique(AccountModel model)
         {
-            var user = AccountRepository.GetUserByUserName(User.Identity.Name);
+            var user = UserRepository.GetUserByUserName(User.Identity.Name);
             var clique = new Clique(User)
                              {
                                  Name = model.CliqueCreate.CliqueName,
                                  IsActive = true
                              };
-            AccountRepository.AddClique(clique);
+            CliqueRepository.AddClique(clique);
             user.Cliques.Add(clique);
             _Session.Commit();
 

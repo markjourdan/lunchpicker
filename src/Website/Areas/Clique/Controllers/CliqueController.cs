@@ -11,7 +11,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 {
     public class CliqueController : Controller
     {
-        public IAccountRepository AccountRepository { get; set; }
+        public ICliqueRepository CliqueRepository { get; set; }
         public IClock Clock { get; set; }
         public ISession _Session { get; set; }
         public ILog Log { get; set; }
@@ -23,7 +23,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
 
         public ActionResult Manage(long cliqueId)
         {
-            var clique = AccountRepository.GetClique(cliqueId);
+            var clique = CliqueRepository.GetClique(cliqueId);
             return View(clique);
         }
 
@@ -32,7 +32,7 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         {
             try
             {
-                var cliqueS = AccountRepository.GetClique(clique.CliqueId);
+                var cliqueS = CliqueRepository.GetClique(clique.CliqueId);
 
                 if(cliqueS == null) 
                     throw new DataException(string.Format("Unable to find a clique with the following id '{0}'", clique.CliqueId));

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using Dino;
 using LunchPicker.Domain.Entities;
@@ -8,23 +7,18 @@ using LunchPicker.Infrastructure.Data;
 
 namespace LunchPicker.Infrastructure.Repositories
 {
-    public class AccountRepository : RepositoryBase, IAccountRepository
+    public class UserRepository : RepositoryBase, IUserRepository
     {
-        public AccountRepository(IObjectContextProvider contextProvider) : base(contextProvider) { }
+        public UserRepository(IObjectContextProvider contextProvider) : base(contextProvider) { }
 
         public IEnumerable<User> GetCliquesUsers(int cliqueId)
         {
             return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId).Users;
         }
-
-        public IEnumerable<Restaurant> GetCliquesRestaurants(int cliqueId)
-        {
-            return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId).Restaurants;
-        }
-
+       
         public IEnumerable<User> GetUsers(long cliqueId)
         {
-            var clique = GetClique(cliqueId);
+            var clique = FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId);
             if (clique != null)
                 return clique.Users;
 
@@ -57,21 +51,6 @@ namespace LunchPicker.Infrastructure.Repositories
             return Find<User>(u => u.EmailAddress == email);
         }
 
-        public IEnumerable<Clique> GetCliques()
-        {
-            return ContextProvider.GetContext<LunchContext>().Query<Clique>();
-        }
-
-        public void AddClique(Clique clique)
-        {
-            ContextProvider.GetContext<LunchContext>().Add(clique);
-        }
-
-        public Clique GetClique(long cliqueId)
-        {
-            return FindSingleOrDefault<Clique>(c => c.CliqueId == cliqueId);
-        }
-
         public User GetUser(long userId)
         {
             return FindSingleOrDefault<User>(u => u.UserId == userId);
@@ -80,11 +59,6 @@ namespace LunchPicker.Infrastructure.Repositories
         public void DeleteUser(User userToDelete)
         {
             Delete(userToDelete);
-        }
-
-        public Clique GetClique(Guid friendlyKey)
-        {
-            return FindSingleOrDefault<Clique>(c => c.FriendlyKey == friendlyKey);
         }
     }
 }

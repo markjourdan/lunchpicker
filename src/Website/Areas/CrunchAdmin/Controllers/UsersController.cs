@@ -12,7 +12,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 {
     public class UsersController : Controller
     {
-        public IAccountRepository AccountRepository { get; set; }
+        public IUserRepository UserRepository { get; set; }
         public ISession _Session { get; set; }
         public IClock Clock { get; set; }
 
@@ -23,7 +23,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
         public ActionResult GetUsers(DataSourceRequest request)
         {
-            return Json(AccountRepository.GetUsers()
+            return Json(UserRepository.GetUsers()
                 .Select(u => new UserModel
                 {
                     EmailAddress = u.EmailAddress,
@@ -40,7 +40,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
         {
             if (user != null && ModelState.IsValid)
             {
-                var target = AccountRepository.GetUser(user.UserId);
+                var target = UserRepository.GetUser(user.UserId);
 
                 if (target != null)
                 {
@@ -60,8 +60,8 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
         {
             if (user != null)
             {
-                var userToDelete = AccountRepository.GetUser(user.UserId);
-                AccountRepository.DeleteUser(userToDelete);
+                var userToDelete = UserRepository.GetUser(user.UserId);
+                UserRepository.DeleteUser(userToDelete);
 
                 _Session.Commit();
             }
@@ -77,7 +77,7 @@ namespace LunchPicker.Web.Areas.CrunchAdmin.Controllers
 
             if (ModelState.IsValid)
             {
-                AccountRepository.AddUser(user);
+                UserRepository.AddUser(user);
 
                 _Session.Commit();
             }

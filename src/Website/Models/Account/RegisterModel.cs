@@ -30,5 +30,9 @@ namespace LunchPicker.Web.Models.Account
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Clique's Join Key (if you have one from an invite or friend)")]
+        public string CliqueKey { get; set; }
     }
 }

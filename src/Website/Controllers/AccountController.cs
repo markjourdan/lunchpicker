@@ -68,6 +68,25 @@ namespace LunchPicker.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                Clique clique = null;
+                if (!String.IsNullOrWhiteSpace(model.CliqueKey))
+                {
+                    try
+                    {
+                        clique = CliqueRepository.GetClique(new Guid(model.CliqueKey));
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Unable to locate a Clique with that ID. The ID isn't in a valid format. Please try again.");
+                    }
+
+                    if (clique == null)
+                    {
+                        ModelState.AddModelError("", "Unable to locate a Clique with that ID. Please try again.");
+                    }
+                    if(!ModelState.IsValid)
+                        return View(model);
+                }
                 // Attempt to register the user
                 try
                 {
@@ -82,6 +101,14 @@ namespace LunchPicker.Web.Controllers
                                                                                         CreatedDateUtc = Clock.UtcNow
                                                                                      });
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    if(clique != null)
+                    {
+                        var user = UserRepository.GetUserByUserName(model.UserName);
+                        user.Cliques.Add(clique);
+                        _Session.Commit();
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

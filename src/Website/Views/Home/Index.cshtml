@@ -7,7 +7,7 @@
     @foreach (var clique in Model.Cliques)
     {
         <div style="margin-top: 10px;">
-            <span class="lblPickWrapper"><label for="place-@clique.CliqueId" class="lblPick">today's spot for @clique.Name</label></span>
+            <label for="place-@clique.CliqueId" class="lblPick">today's spot for @clique.Name</label>
             <input name="place-@clique.CliqueId" type="text" readonly="readonly" id="place-@clique.CliqueId" class="place">
             <div id="ResturantLink-@clique.CliqueId" class="ResturantLink"></div>
             <div style="clear:both;">

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using Dino;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
@@ -57,6 +58,11 @@ namespace LunchPicker.Infrastructure.Repositories
             {
                 Add(state);
             }
+        }
+
+        public IQueryable<Restaurant> GetRestaurants(int cliqueId)
+        {
+            return Find<Restaurant>(c => c.CliqueId == cliqueId);
         }
     }
 }

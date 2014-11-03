@@ -36,9 +36,9 @@ namespace LunchPicker.Web.Areas.Clique.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetRestaurants(DataSourceRequest request)
+        public ActionResult GetRestaurants(DataSourceRequest request, int cliqueId)
         {
-            return Json(LunchRepository.GetRestaurants().Cast<Restaurant>()
+            return Json(LunchRepository.GetRestaurants(cliqueId).Cast<Restaurant>()
                 .Select(r => new RestaurantModel
                              {
                                  RestaurantId = r.RestaurantId,

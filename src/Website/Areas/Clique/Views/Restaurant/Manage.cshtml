@@ -26,6 +26,7 @@
             {
                 model.Id(p => p.RestaurantId);
                 model.Field(column => column.RestaurantId).Editable(false);
+                //model.Field("CliqueId", typeof(int)).DefaultValue(@Model.CliqueId);
             })
         .Events(events => events.Error("error_handler"))
         .Create(create => create.Action("AddRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Put))

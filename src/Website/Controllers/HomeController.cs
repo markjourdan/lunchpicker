@@ -8,7 +8,6 @@ using Kendo.Mvc.UI;
 using LunchPicker.Domain.DataTransferObject;
 using LunchPicker.Domain.Entities;
 using LunchPicker.Domain.Repositories;
-using LunchPicker.Infrastructure.Repositories;
 using LunchPicker.Web.Models.Home;
 using RestaurantModel = LunchPicker.Web.Areas.Clique.Models.Restaurant.RestaurantModel;
 
@@ -90,7 +89,7 @@ namespace LunchPicker.Web.Controllers
         public ActionResult GetRestaurantRanking(DataSourceRequest request, int cliqueId)
         {
             var restaurants = Mapper.Map<IEnumerable<Restaurant>, IEnumerable<RestaurantListingDto>>(
-                RestaurantRepository.GetRestaurantsByClique(cliqueId)).OrderByDescending(r => r.Rating);
+                RestaurantRepository.GetRestaurantsByClique(cliqueId)).OrderByDescending(r => r.Rating).ThenBy(r => r.Name);
 
             return Json(restaurants.ToDataSourceResult(request));
         }

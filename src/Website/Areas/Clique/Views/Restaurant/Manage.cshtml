@@ -9,6 +9,22 @@
 @(Html.Kendo()
     .Grid<RestaurantModel>()
     .Name("Restaurants")
+    .DataSource(data => data.Ajax()
+        .PageSize(20)
+        .ServerOperation(false)
+        .Model(model =>
+            {
+                model.Id(i => i.RestaurantId);
+                model.Field(f => f.RestaurantId).Editable(false);
+                model.Field(f => f.CliqueId).DefaultValue(Model.Clique.CliqueId);
+            })
+        .Sort(s => s.Add(a => a.Name))
+        .Events(events => events.Error("error_handler"))
+        .Create(create => create.Action("AddRestaurant", "Restaurant", new { Area = "Clique" }).Type(HttpVerbs.Put))
+        .Read(read => read.Action("GetRestaurants", "Restaurant", new { Area = "Clique" }).Type(HttpVerbs.Get))
+        .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique" }).Type(HttpVerbs.Post))
+        .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new { Area = "Clique" }).Type(HttpVerbs.Delete))
+    )
     .Columns(columns =>
             {
                 columns.Bound(p => p.Name).Width(150);
@@ -23,21 +39,6 @@
                                     command.Destroy().Text(" ");
                                 }).Width(175);
             })
-    .DataSource(data => data.Ajax()
-        .PageSize(20)
-        .ServerOperation(false)
-        .Model(model =>
-            {
-                model.Id(p => p.RestaurantId);
-                model.Field(column => column.RestaurantId).Editable(false);
-            })
-        .Sort(s => s.Add(a => a.Name))
-        .Events(events => events.Error("error_handler"))
-        .Create(create => create.Action("AddRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Put))
-        .Read(read => read.Action("GetRestaurants", "Restaurant", new { Area ="Clique"}).Type(HttpVerbs.Get))
-        .Update(update => update.Action("UpdateRestaurant", "Restaurant", new { Area = "Clique"}).Type(HttpVerbs.Post))
-        .Destroy(destroy => destroy.Action("DeleteRestaurant", "Restaurant", new {Area = "Clique"}).Type(HttpVerbs.Delete))
-    )
     .ToolBar(toolbar => toolbar.Create().Text("new restaurant"))
     .Events(e => e.Save("SaveRestaurant"))
     .Editable(editable => editable.Mode(GridEditMode.PopUp))
